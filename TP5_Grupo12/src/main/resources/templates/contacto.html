@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" ></link> 
+<link type="text/css" rel="stylesheet" href="../../../css/style.css" ></link>
+<title>CONTACTO</title>
+</head>
+<body>
+	<header th:replace="/layouts/header::header"></header>
+	<h1>CONTACTO</h1>
+	<form action="" method="post" target="_blank">
+		<fieldset>
+			<p>
+				<label>Nombre completo: <input type="text" name="nombreyapellido"></label>
+			</p>
+			<p>
+				Provincia <select name="provincia">
+					<option></option>
+					<option>Jujuy</option>
+					<option>Tucuman</option>
+					<option>Buenos Aires</option>
+				</select>
+			</p>
+			<p>
+				<label>Telefono: <input type="text" name="telefono"></label>
+			</p>
+			<p>
+				<label>Correo Electronico: <input type="email" name="email"></label>
+			</p>
+			<p>
+				Estado Civil: <label><input type="radio" name="estcivil"
+					value="casado"> Casado</label> <label><input type="radio"
+					name="estcivil" value="soltero"> Soltero</label> <label><input
+					type="radio" name="estcivil" value="otro"> Otro</label>
+			</p>
+			<p>
+				<label>Mensaje: <textarea name="mensaje"></textarea>
+			</p>
+			<p>
+				<input type="submit" value="Enviar datos">
+				<!-- <input type="reset" value="Restaurar formulario"> -->
+			</p>
+		</fieldset>
+	</form>
+	<footer th:replace="/layouts/footer::footer"></footer>
+	<script src="/webjars/jquery/jquery.min.js" type="text/javascript"></script>
+	<script src="/webjars/popper.js/umd/popper.min.js" type="text/javascript"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</body>
+</html>

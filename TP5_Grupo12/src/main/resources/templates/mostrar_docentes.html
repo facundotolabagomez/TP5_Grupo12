@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" ></link> 
+<link type="text/css" rel="stylesheet" href="../../../css/style.css" ></link> 
+<title>Lista Docentes</title>
+</head>
+<body>
+
+<header th:replace="/layouts/header::header"></header>
+	<div class="container">
+		<div class="row">
+			<h3>Lista de Docentes</h3>
+		</div>
+		<div><a th:href="@{/docente/nuevo}" id="nuevo" class="btn btn-primary">Nuevo</a></div>
+		<div class="row">
+			<div class="col-sm-12 col-md-10">
+				<table class="table table-hover table-dark">
+					<tr>
+						<th>Legajo</th>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Email</th>
+						<th>Telefono</th>				
+					</tr>
+					<tr th:each="docente: ${docente}">
+						<td th:text="${docente.legajo}"></td>
+						<td th:text="${docente.nombre}"></td>
+						<td th:text="${docente.apellido}"></td>
+						<td th:text="${docente.email}"></td>
+						<td th:text="${docente.telefono}"></td>				
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+	<footer th:replace="/layouts/footer::footer"></footer>
+	<script src="/webjars/jquery/jquery.min.js" type="text/javascript"></script>
+	<script src="/webjars/popper.js/umd/popper.min.js" type="text/javascript"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+</body>
+</html>

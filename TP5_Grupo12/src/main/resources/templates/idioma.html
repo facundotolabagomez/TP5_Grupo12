@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" ></link> 
+<link type="text/css" rel="stylesheet" href="../../../css/style.css" ></link>
+<title>IDIOMAS</title>
+</head>
+<body>
+	<header th:replace="/layouts/header::header"></header>
+	<h1>IDIOMAS</h1>
+		<section>
+			<h3>Encabezados</h3>
+			<p></p>
+			<table class="default" style="width: 100%; border: 2px solid;">
+				<tr>
+					<th>Titulo del curso</th>
+					<th>Fecha de inicio</th>
+					<th>Horario</th>
+					<th>Fecha Fin</th>
+					<th>Modalidad</th>
+					<th>Docente</th>
+					<th>Duración en semanas</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</section>
+	<footer th:replace="/layouts/footer::footer"></footer>
+	<script src="/webjars/jquery/jquery.min.js" type="text/javascript"></script>
+	<script src="/webjars/popper.js/umd/popper.min.js" type="text/javascript"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</body>
+</html>

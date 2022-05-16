@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" ></link> 
+<link type="text/css" rel="stylesheet" href="../../../css/style.css" ></link>
+<title>Lista de Docentes</title>
+</head>
+<body>
+
+<header th:replace="/layouts/header :: header"></header>
+		<div class="container">
+			<br>
+			<p class="h4 mb-10">DOCENTES</p>
+			<br>
+			<div class="col-12 d-flex justify-content-center">
+				<table class="table table-striped table-hover">
+						<tr>
+							<th>Codigo</th>
+						    <th>Titulo</th>
+							<th>Categoria</th>
+							<th>Inicio</th>
+							<th>Fin</th>
+							<th>Cant de horas</th>
+							<th>Modalidad</th>
+							<th>Docente</th>
+						</tr>	
+						<tr th:each="curso: ${curso}">
+							<td th:text="${curso.codigo}"></td>
+							<td th:text="${curso.titulo}"></td>
+							<td th:text="${curso.categoria}"></td>
+							<td th:text="${curso.inicio}"></td>
+							<td th:text="${curso.fin}"></td>
+							<td th:text="${curso.cantidadDeHoras}"></td>
+							<td th:text="${curso.modalidad}"></td>
+							<td th:text="${curso.docente.apellido}"></td>
+							<td>
+							<a href="#" id="editarAlumno" class="btn btn-warning">Editar</a>
+							<a href="#" id="eliminarAlumno" class="btn btn-danger">Eliminar</a>
+							</td>
+						</tr>
+					</table>
+				<br><br>
+				
+			</div>
+		
+		</div>
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

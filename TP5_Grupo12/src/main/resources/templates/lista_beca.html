@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" ></link> 
+<link type="text/css" rel="stylesheet" href="../../../css/style.css" ></link>
+<title>Lista de Becas</title>
+</head>
+<body>
+
+<header th:replace="/layouts/header :: header"></header>
+		<div class="container">
+			<br>
+			<p class="h4 mb-10">BECAS</p>
+			<br>
+			<div class="col-12 d-flex justify-content-center">
+				<table class="table table-striped table-hover">
+						<tr>
+							<th>Codigo</th>
+							<th>Curso</th>
+							<th>Inicio</th>
+							<th>Cierre</th>
+							<th>Estado</th>
+							<th>Opciones</th>
+						</tr>	
+						<tr th:each="beca: ${beca}">
+							<td th:text="${beca.codigo}"></td>
+							<td th:text="${beca.curso}"></td>
+							<td th:text="${beca.inicio}"></td>
+							<td th:text="${beca.cierre}"></td>
+							<td th:text="${beca.estado}"></td>
+							<td>
+							<a href="#" id="editarBeca" class="btn btn-warning">Editar</a>
+							<a href="#" id="eliminarBeca" class="btn btn-danger">Eliminar</a>
+							</td>
+						</tr>
+					</table>
+				<br><br>
+				
+			</div>
+		
+		</div>
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

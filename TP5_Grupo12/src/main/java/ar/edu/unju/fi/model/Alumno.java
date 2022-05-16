@@ -51,6 +51,15 @@ public class Alumno {
 		this.telefono = telefono;
 	}
 
+	public Alumno(int dni, String nombre, String apellido, String email, String telefono) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.telefono = telefono;
+	}
+
 	
 	
 	

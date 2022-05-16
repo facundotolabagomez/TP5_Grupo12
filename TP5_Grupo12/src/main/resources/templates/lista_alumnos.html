@@ -4,34 +4,34 @@
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" ></link> 
 <link type="text/css" rel="stylesheet" href="../../../css/style.css" ></link>
-<title>Lista de Docentes</title>
+<title>Lista de Alumnos</title>
 </head>
 <body>
 
 <header th:replace="/layouts/header :: header"></header>
 		<div class="container">
 			<br>
-			<p class="h4 mb-10">DOCENTES</p>
+			<p class="h4 mb-10">ALUMNOS</p>
 			<br>
 			<div class="col-12 d-flex justify-content-center">
 				<table class="table table-striped table-hover">
 						<tr>
-							<th>Legajo</th>
+							<th>DNI</th>
 							<th>Apellidos</th>
 							<th>Nombres</th>
 							<th>E-mail</th>
 							<th>Teléfono</th>
 							<th>Opciones</th>
 						</tr>	
-						<tr th:each="docente: ${docente}">
-							<td th:text="${docente.legajo}"></td>
-							<td th:text="${docente.apellido}"></td>
-							<td th:text="${docente.nombre}"></td>
-							<td th:text="${docente.email}"></td>
-							<td th:text="${docente.telefono}"></td>
+						<tr th:each="alumno: ${alumno}">
+							<td th:text="${alumno.dni}"></td>
+							<td th:text="${alumno.apellido}"></td>
+							<td th:text="${alumno.nombre}"></td>
+							<td th:text="${alumno.email}"></td>
+							<td th:text="${alumno.telefono}"></td>
 							<td>
-							<a href="#" id="editarDocente" class="btn btn-warning">Editar</a>
-							<a href="#" id="eliminarDocente" class="btn btn-danger">Eliminar</a>
+							<a href="#" id="editarAlumno" class="btn btn-warning">Editar</a>
+							<a href="#" id="eliminarAlumno" class="btn btn-danger">Eliminar</a>
 							</td>
 						</tr>
 					</table>

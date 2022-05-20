@@ -1,10 +1,24 @@
 package ar.edu.unju.fi.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+//import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Alumno {
+	@Min(value=1000000, message = "DNI No valido")
 	private int dni;
+	@NotNull (message = "Debe completar el Nombre")
+	@Size(min=3, max=30)
 	private String nombre;
+	@NotNull(message = "Debe completar el Apellido")
+	@Size(min=3, max=30)
 	private String apellido;
+	@NotNull(message = "Debe completar el Email")
+	@Email
 	private String email;
+	@NotNull (message = "Debe completar el Telefono")
 	private String telefono;
 	
 	public Alumno() {

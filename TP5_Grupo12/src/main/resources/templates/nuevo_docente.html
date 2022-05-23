@@ -11,36 +11,40 @@
 	<div class="container bg-light">
 			<div class="row"> <!--inicio de contenedor row-->
 				<section class="col-md-12" style="margin: auto">
-	
-					<form th:action="@{/docente/guardar}" method="POST" th:object="${docente}">
-						<header style="background-color: cornflowerblue; margin-top: 1.4%; border-radius: 10px;"><h3>Alta Docente</h3></header>
-						
-						<div class="mb-3">
-							<label for="LegajoId" class="form-label">Legajo</label>
-							<input th:field="*{legajo}" type="number" class="form-control"	id="LegajoId">
-						</div>
-						<div class="mb-3">
-							<label for="NombreId" class="form-label">Nombres</label>
-							<input th:field="*{nombre}" type="text" class="form-control"	id="NombreId">
-						</div>
-						<div class="mb-3">
-							<label for="InputApellido" class="form-label">Apellidos</label>
-							<input th:field="*{apellido}" type="text" class="form-control"	id="InputApellido">
-						</div>
-						<div class="mb-3">
-							<label for="EmailId" class="form-label">Email address</label> 
-							<input th:field="*{email}" type="email" class="form-control" id="EmailId"> <!--aria-describedby="emailHelp" --> 
-							<!-- <div id="emailHelp" class="form-text">Nunca compartas tu correo con nadie</div>  -->
-						</div>
-						<div class="mb-3">
-							<label for="TelefonoId" class="form-label">Telefono</label>
-							<input th:field="*{telefono}" type="text" class="form-control"	id="TelefonoId">
-						</div>
-						<button type="submit" class="btn btn-primary">Enviar</button>
-					</form>
-			</section>
+
+	<form th:action="@{/docente/guardar}" method="POST" th:object="${docente}">
+		<header> <h3>Alta Docente</h3> </header>
+		
+		<div class="mb-3">
+			<label for="LegajoId" class="form-label">Legajo</label>
+			<input th:field="*{legajo}" type="number" class="form-control"	id="LegajoId">
+			<div class="text-danger" th:if="${#fields.hasErrors('legajo')}" th:errors="*{legajo}"></div>
 		</div>
-	</div><br>
+		<div class="mb-3">
+			<label for="NombreId" class="form-label">Nombres</label>
+			<input th:field="*{nombre}" type="text" class="form-control" id="NombreId">
+			<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+		</div>
+		<div class="mb-3">
+			<label for="InputApellido" class="form-label">Apellidos</label>
+			<input th:field="*{apellido}" type="text" class="form-control"	id="InputApellido">
+			<div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+		</div>
+		<div class="mb-3">
+			<label for="EmailId" class="form-label">Email address</label> 
+			<input th:field="*{email}" type="email" class="form-control" id="EmailId"> 
+			<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+			<!--aria-describedby="emailHelp" --> 
+			<!-- <div id="emailHelp" class="form-text">Nunca compartas tu correo con nadie</div>  -->
+		</div>
+		<div class="mb-3">
+			<label for="TelefonoId" class="form-label">Telefono</label>
+			<input th:field="*{telefono}" type="text" class="form-control"	id="TelefonoId">
+			<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+		</div>
+		<button type="submit" class="btn btn-primary">Enviar</button>
+	</form>
+
 
 	<footer th:replace="/layouts/footer::footer"></footer>
 	<script src="/webjars/jquery/jquery.min.js" type="text/javascript"></script>

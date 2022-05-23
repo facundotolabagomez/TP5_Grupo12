@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" ></link> 
 <link type="text/css" rel="stylesheet" href="../../../css/style.css" ></link>
-<title>Lista de Docentes</title>
+<title>Lista de Cursos</title>
 </head>
 <body>
 
 <header th:replace="/layouts/header :: header"></header>
-		<div class="container">
-			<br>
-			<p class="h4 mb-10">DOCENTES</p>
-			<br>
+	<div class="container bg-light">
+	 <div class="row"> <!--inicio de contenedor row-->
+	 <section class="col-md-12" style="margin: auto">
+	 <header style="background-color: cornflowerblue; margin-top: 1.4%; border-radius: 10px;"><h3>Editar Cursos</h3></header>
 			<div class="col-12 d-flex justify-content-center">
 				<table class="table table-striped table-hover">
 						<tr>
@@ -24,6 +24,7 @@
 							<th>Cant de horas</th>
 							<th>Modalidad</th>
 							<th>Docente</th>
+							<th>Opciones</th>
 						</tr>	
 						<tr th:each="curso: ${curso}">
 							<td th:text="${curso.codigo}"></td>
@@ -39,9 +40,9 @@
 							<a href="#" id="eliminarAlumno" class="btn btn-danger">Eliminar</a>
 							</td>
 						</tr>
-					</table>
-				<br><br>
-				
+					</table>				
+			</div>
+			</section>
 			</div>
 		
 		</div>

@@ -19,10 +19,10 @@ public class IndexController {
 		return "idioma"; 
 	}
 	
-//	@GetMapping("/beneficios")
-//	public String getBeneficiosPage(Model model) {
-//		return "beneficios"; 
-//	}
+	@GetMapping("/beneficios")
+	public String getBeneficiosPage(Model model) {
+		return "beneficios"; 
+	}
 	
 	@GetMapping("/agenda")
 	public String getAgendaPage(Model model) {

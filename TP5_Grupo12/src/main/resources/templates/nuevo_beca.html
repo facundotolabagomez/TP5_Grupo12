@@ -8,32 +8,42 @@
 </head>
 <body>
 	<header th:replace="/layouts/header::header"></header>
-	
-	<form th:action="@{/beneficios/guardar}" method="POST" th:object="${beca}">
-		<header> <h3>Alta Beca</h3> </header>
-		
-		<div class="mb-3">
-			<label for="LegajoId" class="form-label">Codigo</label>
-			<input th:field="*{codigo}" type="number" class="form-control"	id="CodigoId">
-		</div>
-		<div class="mb-3">
-			<label for="CursoId" class="form-label">Curso</label>
-			<input th:field="*{curso}" type="text" class="form-control"	id="CursoId">
-		</div>
-		<div class="mb-3">
-			<label for="InputInicio" class="form-label">Inicio</label>
-			<input th:field="*{inicio}" type="text" class="form-control" id="InputInicio" placeholder="2007-12-03">
-		</div>
-		<div class="mb-3">
-			<label for="InputCierre" class="form-label">Cierre</label> 
-			<input th:field="*{cierre}" type="text" class="form-control" id="InputCierre" placeholder="2007-12-03"> 
-		</div>
-		<div class="mb-3">
-			<label for="InputEstado" class="form-label">Estado</label>
-			<input th:field="*{estado}" type="text" class="form-control" id="InputEstado">
-		</div>
-		<button type="submit" class="btn btn-primary">Enviar</button>
-	</form>
+		<div class="container bg-light">
+			<div class="row"> <!--inicio de contenedor row-->
+				<section class="col-md-12" style="margin: auto">	
+				<form th:action="@{/beneficios/guardar}" method="POST" th:object="${beca}">
+					<header style="background-color: cornflowerblue; margin-top: 1.4%; border-radius: 10px;"><h3>Alta Beca</h3></header>
+					
+					<div class="mb-3">
+						<label for="LegajoId" class="form-label">Codigo</label>
+						<input th:field="*{codigo}" type="number" class="form-control"	id="CodigoId">
+						<div class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+					</div>
+					<div class="mb-3">
+						<label for="CursoId" class="form-label">Curso</label>
+						<input th:field="*{curso}" type="text" class="form-control"	id="CursoId">
+						<div class="text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></div>
+					</div>
+					<div class="mb-3">
+						<label for="InputInicio" class="form-label">Inicio</label>
+						<input th:field="*{inicio}" type="text" class="form-control" id="InputInicio" placeholder="2007-12-03">
+						<div class="text-danger" th:if="${#fields.hasErrors('inicio')}" th:errors="*{inicio}"></div>
+					</div>
+					<div class="mb-3">
+						<label for="InputCierre" class="form-label">Cierre</label> 
+						<input th:field="*{cierre}" type="text" class="form-control" id="InputCierre" placeholder="2007-12-03"> 
+						<div class="text-danger" th:if="${#fields.hasErrors('cierre')}" th:errors="*{cierre}"></div>
+					</div>
+					<div class="mb-3">
+						<label for="InputEstado" class="form-label">Estado</label>
+						<input th:field="*{estado}" type="text" class="form-control" id="InputEstado">
+						<div class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></div>
+					</div>
+					<button type="submit" class="btn btn-primary">Enviar</button>
+				</form>
+				</section>
+			</div>
+	</div><br>
 
 	<footer th:replace="/layouts/footer::footer"></footer>
 	<script src="/webjars/jquery/jquery.min.js" type="text/javascript"></script>

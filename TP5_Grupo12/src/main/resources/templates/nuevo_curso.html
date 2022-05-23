@@ -8,45 +8,59 @@
 </head>
 <body>
 	<header th:replace="/layouts/header::header"></header>
+	<div class="container bg-light">
+			<div class="row"> <!--inicio de contenedor row-->
+				<section class="col-md-12" style="margin: auto">
 	
-	<form th:action="@{/cursos/guardar}" method="POST" th:object="${curso}">
-		<header> <h3>Alta Curso</h3> </header>
-		
-		<div class="mb-3">
-			<label for="CodigoId" class="form-label">Codigo</label>
-			<input th:field="*{codigo}" type="number" class="form-control"	id="CodigoId">
-		</div>
-		<div class="mb-3">
-			<label for="TituloId" class="form-label">Titulo</label>
-			<input th:field="*{titulo}" type="text" class="form-control"	id="TituloId">
-		</div>
-		<div class="mb-3">
-			<label for="CategoriaId" class="form-label">Categoria</label>
-			<input th:field="*{categoria}" type="text" class="form-control" id="CategoriaId">
-		</div>
-		<div class="mb-3">
-			<label for="InputInicio" class="form-label">Inicio</label> 
-			<input th:field="*{inicio}" type="text" class="form-control" id="InputInicio" placeholder="2007-12-03"> 
-		</div>
-		<div class="mb-3">
-			<label for="InputFin" class="form-label">Fin</label>
-			<input th:field="*{fin}" type="text" class="form-control" id="InputFin" placeholder="2007-12-03">
-		</div>
-		<div class="mb-3">
-			<label for="InputCantHoras" class="form-label">Cant de horas</label>
-			<input th:field="*{cantidadDeHoras}" type="number" class="form-control" id="InputCantHoras" >
-		</div>
-		<div class="mb-3">
-			<label for="InputModalidad" class="form-label">Modalidad</label>
-			<input th:field="*{modalidad}" type="text" class="form-control" id="InputModalidad">
-		</div>
-		<div class="mb-3">
-			<label for="InputEstado" class="form-label">Docente</label>
-			<input th:field="*{docente.legajo}" type="text" class="form-control" id="InputEstado">
-		</div>
-		
-		<button type="submit" class="btn btn-primary">Enviar</button>
-	</form>
+					<form th:action="@{/cursos/guardar}" method="POST" th:object="${curso}">
+						<header style="background-color: cornflowerblue; margin-top: 1.4%; border-radius: 10px;"><h3>Alta Curso</h3></header>
+						
+						<div class="mb-3">
+							<label for="CodigoId" class="form-label">Codigo</label>
+							<input th:field="*{codigo}" type="number" class="form-control"	id="CodigoId">
+							<div class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="TituloId" class="form-label">Titulo</label>
+							<input th:field="*{titulo}" type="text" class="form-control"	id="TituloId">
+							<div class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="CategoriaId" class="form-label">Categoria</label>
+							<input th:field="*{categoria}" type="text" class="form-control" id="CategoriaId">
+							<div class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="InputInicio" class="form-label">Inicio</label> 
+							<input th:field="*{inicio}" type="text" class="form-control" id="InputInicio" placeholder="2007-12-03">
+							<div class="text-danger" th:if="${#fields.hasErrors('inicio')}" th:errors="*{inicio}"></div> 
+						</div>
+						<div class="mb-3">
+							<label for="InputFin" class="form-label">Fin</label>
+							<input th:field="*{fin}" type="text" class="form-control" id="InputFin" placeholder="2007-12-03">
+							<div class="text-danger" th:if="${#fields.hasErrors('fin')}" th:errors="*{fin}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="InputCantHoras" class="form-label">Cant de horas</label>
+							<input th:field="*{cantidadDeHoras}" type="number" class="form-control" id="InputCantHoras" >
+							<div class="text-danger" th:if="${#fields.hasErrors('cantidadDeHoras')}" th:errors="*{cantidadDeHoras}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="InputModalidad" class="form-label">Modalidad</label>
+							<input th:field="*{modalidad}" type="text" class="form-control" id="InputModalidad">
+							<div class="text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></div>
+						</div>
+						<div class="mb-3">
+							<label for="InputEstado" class="form-label">Docente</label>
+							<input th:field="*{docente.legajo}" type="text" class="form-control" id="InputEstado">
+							<div class="text-danger" th:if="${#fields.hasErrors('docente')}" th:errors="*{docente}"></div> 
+						</div>
+						
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					</form>
+				</section>
+			</div>
+		</div><br>
 
 	<footer th:replace="/layouts/footer::footer"></footer>
 	<script src="/webjars/jquery/jquery.min.js" type="text/javascript"></script>

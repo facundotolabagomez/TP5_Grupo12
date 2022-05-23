@@ -4,6 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +28,16 @@ public class DocenteController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView getListaDocentesPage(@ModelAttribute("docente")Docente docente) {
+	public ModelAndView getListaDocentesPage(@Validated @ModelAttribute("docente")Docente docente, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			LOGGER.error("No se cumplen las reglas de validación");
+
+			ModelAndView mav = new ModelAndView("nuevo_docente");
+			mav.addObject("docente", docente);
+			return mav;
+			
+		}
+		
 		ModelAndView mavdocente = new ModelAndView("mostrar_docentes");
 		ListaDocente listaDocentes = new ListaDocente();
 		if (listaDocentes.getDocentes().add(docente)) {

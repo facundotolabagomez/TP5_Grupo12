@@ -1,10 +1,24 @@
 package ar.edu.unju.fi.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Docente {
+	@Min(value=1, message="El valor mínimo es 1") 
+	@Max(value=9999,message="El valor máximo permitido es 9999")
 	private int legajo;
+	@NotEmpty(message="El nombre no puede ser vacío")
 	private String nombre;
+	@NotEmpty(message="El apellido no puede ser vacío")
 	private String apellido;
+	@NotEmpty(message="El email no puede ser vacío")
+	@Email(message = "Formato de mail no valido")
 	private String email;
+	@NotEmpty(message="El telefono no puede ser vacío")
+	@Size (min = 10,max = 11)
 	private String telefono;
 	
 	public int getLegajo() {

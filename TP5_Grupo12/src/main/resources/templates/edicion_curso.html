@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Edición Curso</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	
+	<body>
+		<header th:replace="/layouts/header :: header"></header>
+		<div class="container col-4">
+			<br>
+			<h4>Edición Curso</h4>
+			<br>
+	
+			<form th:action="@{/cursos/modificar}" method="POST" th:object="${curso}">
+				<div class="mb-3">
+				    <label for="codigoId" class="form-label">CODIGO</label>
+					<input type="hidden" th:field="*{codigo}"/>					 
+					<input  th:value="${codigo}" type="number" class="form-control" id="codigoId" disabled="disabled">
+				</div>
+				<div class="mb-3">
+					<label for="tituloId" class="form-label">TITULO</label> 
+					<input  th:field="*{titulo}" type="text" class="form-control" id="tituloId">
+					<div class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+				</div>
+				<div class="mb-3">
+					<label for="categoriaId" class="form-label">CATEGORIA</label> 
+					<input  th:field="*{categoria}" type="text" class="form-control" id="categoriaId">
+					<div class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
+				</div>
+				<div class="mb-3">
+					<label for="inicioId" class="form-label">INICIO</label> 
+					<input th:field="*{inicio}" type="date" class="form-control" id="inicioId" >
+					<div class="text-danger" th:if="${#fields.hasErrors('inicio')}" th:errors="*{inicio}"></div>
+				</div>
+				<div class="mb-3">
+					<label for="finId" class="form-label">FIN</label> 
+					<input th:field="*{fin}" type="date" class="form-control" id="finId">
+					<div class="text-danger" th:if="${#fields.hasErrors('fin')}" th:errors="*{fin}"></div>
+				</div>
+				
+				<div class="mb-3">
+					<label for="cantHorasId" class="form-label">CANT. DE HORAS</label> 
+					<input th:field="*{cantidadDeHoras}" type="number" class="form-control" id="cantHorasId">
+					<div class="text-danger" th:if="${#fields.hasErrors('cantidadDeHoras')}" th:errors="*{cantidadDeHoras}"></div>
+				</div>
+				
+				<div class="mb-3">
+					<label for="modalidadId" class="form-label">MODALIDAD</label> 
+					<input th:field="*{modalidad}" type="text" class="form-control" id="modalidadId">
+					<div class="text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></div>
+				</div>
+				
+				<div class="mb-3">
+					<label for="docenteId" class="form-label">DOCENTE</label> 
+					<input th:field="*{docente.apellido}" type="text" class="form-control" id="docenteId">
+					<div class="text-danger" th:if="${#fields.hasErrors('docente')}" th:errors="*{docente.apellido}"></div>
+				</div>
+				
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button class="btn btn-primary me-md-2" type="submit">Editar</button>
+					 <a th:href="@{/cursos/lista}" id="cancel" class="btn btn-secondary">Cancelar</a>
+					 	  				
+				</div>
+			</form>
+		</div>
+		<br><br>
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+	
+	
+	</body>
+</html>

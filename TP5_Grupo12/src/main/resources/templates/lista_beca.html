@@ -25,13 +25,13 @@
 						</tr>	
 						<tr th:each="beca: ${beca}">
 							<td th:text="${beca.codigo}"></td>
-							<td th:text="${beca.curso}"></td>
+							<td th:text="${beca.curso.titulo}"></td>
 							<td th:text="${beca.inicio}"></td>
 							<td th:text="${beca.cierre}"></td>
 							<td th:text="${beca.estado}"></td>
 							<td>
-							<a href="#" id="editarBeca" class="btn btn-warning">Editar</a>
-							<a href="#" id="eliminarBeca" class="btn btn-danger">Eliminar</a>
+							<a th:href="@{/beneficios/editar/}+${beca.codigo}"  id="editarBeca" class="btn btn-warning">Editar</a>
+							<a th:href="@{/beneficios/eliminar/}+${beca.codigo}" id="eliminarBeca" class="btn btn-danger">Eliminar</a>
 							</td>
 						</tr>
 					</table>								

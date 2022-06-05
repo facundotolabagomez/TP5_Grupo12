@@ -2,6 +2,7 @@ package ar.edu.unju.fi.model;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 //import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,6 +19,7 @@ public class Alumno {
 	@NotNull(message = "Debe completar el Email")
 	@Email
 	private String email;
+	@NotEmpty(message = "Debe completar el Telefono")
 	@NotNull (message = "Debe completar el Telefono")
 	private String telefono;
 	

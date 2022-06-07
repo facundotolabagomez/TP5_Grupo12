@@ -54,14 +54,14 @@ public class DocenteController {
 	
 	@GetMapping("/mostrar")
 	public String getDocentesPage(Model model) {
-		ListaDocente listaDocentes = new ListaDocente();
+		//ListaDocente listaDocentes = new ListaDocente();
 		model.addAttribute("docente", listaDocentes.getDocentes());
 		return "mostrar_docentes";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaDocentesPage(Model model) {
-		ListaDocente listaDocentes = new ListaDocente();
+		//ListaDocente listaDocentes = new ListaDocente();
 		model.addAttribute("docente", listaDocentes.getDocentes());
 		return "lista_docentes";
 	}

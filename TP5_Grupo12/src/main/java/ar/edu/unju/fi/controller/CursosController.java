@@ -24,7 +24,7 @@ import ar.edu.unju.fi.util.ListaCurso;
 @Controller
 @RequestMapping("/cursos")
 public class CursosController {
-	ListaCurso listacurso = new ListaCurso();
+	ListaCurso listaCurso = new ListaCurso();
 	private static final Log LOGGER = LogFactory.getLog(CursosController.class);
 	
 	@GetMapping("/nuevo")
@@ -44,7 +44,7 @@ public class CursosController {
 			
 		}
 		ModelAndView mavcurso = new ModelAndView("mostrar_cursos");
-		ListaCurso listaCurso = new ListaCurso();
+		//ListaCurso listaCurso = new ListaCurso();
 		if (listaCurso.getCursos().add(curso)) {
 			LOGGER.info("Se agregó un objeto al arrayList Cursos");
 		}
@@ -54,14 +54,14 @@ public class CursosController {
 	
 	@GetMapping("/mostrar")
 	public String getCursosPage(Model model) {
-		ListaCurso listaCurso = new ListaCurso();
+		//ListaCurso listaCurso = new ListaCurso();
 		model.addAttribute("curso", listaCurso.getCursos());
 		return "mostrar_cursos";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaCursosPage(Model model) {
-		ListaCurso listaCurso = new ListaCurso();
+		//ListaCurso listaCurso = new ListaCurso();
 		model.addAttribute("curso", listaCurso.getCursos());
 		return "lista_cursos";
 	}
@@ -69,7 +69,7 @@ public class CursosController {
 	@GetMapping("/editar/{codigo}")
 	public ModelAndView getEditarCursoPage(@PathVariable(value="codigo")int codigo) {
 		ModelAndView mav = new ModelAndView("edicion_curso");
-		Optional<Curso> curso = listacurso.getCursos().stream().filter(a -> a.getCodigo() == codigo).findFirst();
+		Optional<Curso> curso = listaCurso.getCursos().stream().filter(a -> a.getCodigo() == codigo).findFirst();
 		mav.addObject("curso", curso);
 		return mav;
 	}
@@ -84,7 +84,7 @@ public class CursosController {
 		}
 		
 		ModelAndView mav = new ModelAndView("lista_cursos");
-		for(Curso cur : listacurso.getCursos()) {
+		for(Curso cur : listaCurso.getCursos()) {
 			if(cur.getCodigo() == curso.getCodigo()) {
 				cur.setTitulo(curso.getTitulo());
 				cur.setCategoria(curso.getCategoria());
@@ -95,7 +95,7 @@ public class CursosController {
 			}
 			mav.addObject("curso", cur);
 		}
-		mav.addObject("curso", listacurso.getCursos());
+		mav.addObject("curso", listaCurso.getCursos());
 		
 		return mav;
 	}
@@ -103,14 +103,14 @@ public class CursosController {
 	@GetMapping("/eliminar/{codigo}")
 	public ModelAndView getEliminarCursoPage(@PathVariable(value = "codigo") int codigo) {
 		ModelAndView mavCurso = new ModelAndView("lista_cursos");
-		for (int i = listacurso.getCursos().size(); i > 0; i--) {
+		for (int i = listaCurso.getCursos().size(); i > 0; i--) {
 			//if (can.getCodigo() == codigo) {
-			if (listacurso.getCursos().get(i-1).getCodigo() == codigo) {
+			if (listaCurso.getCursos().get(i-1).getCodigo() == codigo) {
 				LOGGER.info("Se elimino Curso");
-				listacurso.getCursos().remove(i-1);
+				listaCurso.getCursos().remove(i-1);
 			}
 		}
-		mavCurso.addObject("curso", listacurso.getCursos());
+		mavCurso.addObject("curso", listaCurso.getCursos());
 		return mavCurso;
 	}
 }

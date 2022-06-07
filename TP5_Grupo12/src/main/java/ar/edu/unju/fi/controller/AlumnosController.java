@@ -21,7 +21,7 @@ import ar.edu.unju.fi.util.ListaAlumno;
 @Controller
 @RequestMapping("/alumno")
 public class AlumnosController {
-	ListaAlumno listaalumnos = new ListaAlumno();
+	ListaAlumno listaAlumnos = new ListaAlumno();
 	private static final Log LOGGER = LogFactory.getLog(AlumnosController.class);
 	
 	@GetMapping("/nuevo")
@@ -42,7 +42,7 @@ public class AlumnosController {
 		}
 		
 		ModelAndView mavalumno = new ModelAndView("mostrar_alumnos");
-		ListaAlumno listaAlumnos = new ListaAlumno();
+		//ListaAlumno listaAlumnos = new ListaAlumno();
 		if (listaAlumnos.getAlumnos().add(alumno)) {
 			LOGGER.info("Se agregó un objeto al arrayList Alumnos");
 		}
@@ -52,14 +52,14 @@ public class AlumnosController {
 	
 	@GetMapping("/mostrar")
 	public String getAlumnosPage(Model model) {
-		ListaAlumno listaAlumnos = new ListaAlumno();
+		//ListaAlumno listaAlumnos = new ListaAlumno();
 		model.addAttribute("alumno", listaAlumnos.getAlumnos());
 		return "mostrar_alumnos";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaAlumnosPage(Model model) {
-		ListaAlumno listaAlumnos = new ListaAlumno();
+		//ListaAlumno listaAlumnos = new ListaAlumno();
 		model.addAttribute("alumno", listaAlumnos.getAlumnos());
 		return "lista_alumnos";
 	}
@@ -67,7 +67,7 @@ public class AlumnosController {
 	@GetMapping("/editar/{dni}")
 	public ModelAndView getEditarAlumnoPage(@PathVariable(value="dni")int dni) {
 		ModelAndView mav = new ModelAndView("edicion_alumno");
-		Optional<Alumno> alumno = listaalumnos.getAlumnos().stream().filter(a -> a.getDni() == dni).findFirst();
+		Optional<Alumno> alumno = listaAlumnos.getAlumnos().stream().filter(a -> a.getDni() == dni).findFirst();
 		mav.addObject("alumno", alumno);
 		return mav;
 	}
@@ -82,7 +82,7 @@ public class AlumnosController {
 		}
 		
 		ModelAndView mav = new ModelAndView("lista_alumnos");
-		for(Alumno alum : listaalumnos.getAlumnos()) {
+		for(Alumno alum : listaAlumnos.getAlumnos()) {
 			if(alum.getDni() == alumno.getDni()) {
 				alum.setNombre(alumno.getNombre());
 				alum.setApellido(alumno.getApellido());
@@ -91,7 +91,7 @@ public class AlumnosController {
 			}
 			mav.addObject("alumno", alum);
 		}
-		mav.addObject("alumno", listaalumnos.getAlumnos());
+		mav.addObject("alumno", listaAlumnos.getAlumnos());
 		
 		return mav;
 	}
@@ -99,14 +99,14 @@ public class AlumnosController {
 	@GetMapping("/eliminar/{dni}")
 	public ModelAndView getEliminarAlumnoPage(@PathVariable(value = "dni") int dni) {
 		ModelAndView mavAlumno = new ModelAndView("lista_alumnos");
-		for (int i = listaalumnos.getAlumnos().size(); i > 0; i--) {
+		for (int i = listaAlumnos.getAlumnos().size(); i > 0; i--) {
 			//if (can.getCodigo() == codigo) {
-			if (listaalumnos.getAlumnos().get(i-1).getDni() == dni) {
+			if (listaAlumnos.getAlumnos().get(i-1).getDni() == dni) {
 				LOGGER.info("Se elimino Alumno");
-				listaalumnos.getAlumnos().remove(i-1);
+				listaAlumnos.getAlumnos().remove(i-1);
 			}
 		}
-		mavAlumno.addObject("candidato", listaalumnos.getAlumnos());
+		mavAlumno.addObject("candidato", listaAlumnos.getAlumnos());
 		return mavAlumno;
 	}
 }

@@ -26,7 +26,7 @@ import ar.edu.unju.fi.util.ListaBeca;
 @Controller
 @RequestMapping("/beneficios")
 public class BecasController {
-	ListaBeca listabecas = new ListaBeca();
+	ListaBeca listaBecas = new ListaBeca();
 	private static final Log LOGGER = LogFactory.getLog(BecasController.class);
 	
 	@GetMapping("/nuevo")
@@ -48,25 +48,25 @@ public class BecasController {
 		
 		
 		ModelAndView mavbeca = new ModelAndView("mostrar_becas");
-		ListaBeca listaBeca = new ListaBeca();
-		if (listaBeca.getBecas().add(beca)) {
+		//ListaBeca listaBeca = new ListaBeca();
+		if (listaBecas.getBecas().add(beca)) {
 			LOGGER.info("Se agregó un objeto al arrayList Becas");
 		}
-		mavbeca.addObject("beca", listaBeca.getBecas());
+		mavbeca.addObject("beca", listaBecas.getBecas());
 		return mavbeca; 
 	}
 	
 	@GetMapping("/mostrar")
 	public String getBecasPage(Model model) {
-		ListaBeca listaBeca = new ListaBeca();
-		model.addAttribute("beca", listaBeca.getBecas());
+		//ListaBeca listaBeca = new ListaBeca();
+		model.addAttribute("beca", listaBecas.getBecas());
 		return "mostrar_becas";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaBecasPage(Model model) {
-		ListaBeca listaBeca = new ListaBeca();
-		model.addAttribute("beca", listaBeca.getBecas());
+		//ListaBeca listaBeca = new ListaBeca();
+		model.addAttribute("beca", listaBecas.getBecas());
 		return "lista_beca";
 	}
 	
@@ -74,7 +74,7 @@ public class BecasController {
 	public ModelAndView getEditarBecaPage(@PathVariable(value="codigo")int codigo) {
 		//ListaBeca listabecas = new ListaBeca();
 		ModelAndView mav = new ModelAndView("edicion_beca");
-		Optional<Beca> beca = listabecas.getBecas().stream().filter(a -> a.getCodigo() == codigo).findFirst();
+		Optional<Beca> beca = listaBecas.getBecas().stream().filter(a -> a.getCodigo() == codigo).findFirst();
 		mav.addObject("beca", beca);
 		return mav;
 	}
@@ -89,7 +89,7 @@ public class BecasController {
 		}
 		
 		ModelAndView mav = new ModelAndView("lista_beca");
-		for(Beca bec : listabecas.getBecas()) {
+		for(Beca bec : listaBecas.getBecas()) {
 			if(bec.getCodigo() == beca.getCodigo()) {
 				bec.setCurso(beca.getCurso());
 				bec.setInicio(beca.getInicio());
@@ -98,7 +98,7 @@ public class BecasController {
 			}
 			mav.addObject("beca", bec);
 		}
-		mav.addObject("beca", listabecas.getBecas());
+		mav.addObject("beca", listaBecas.getBecas());
 		
 		return mav;
 	}
@@ -106,14 +106,14 @@ public class BecasController {
 	@GetMapping("/eliminar/{codigo}")
 	public ModelAndView getEliminarBecaPage(@PathVariable(value = "codigo") int codigo) {
 		ModelAndView mavBeca = new ModelAndView("lista_beca");
-		for (int i = listabecas.getBecas().size(); i > 0; i--) {
+		for (int i = listaBecas.getBecas().size(); i > 0; i--) {
 			//if (can.getCodigo() == codigo) {
-			if (listabecas.getBecas().get(i-1).getCodigo() == codigo) {
+			if (listaBecas.getBecas().get(i-1).getCodigo() == codigo) {
 				LOGGER.info("Se elimino Beca");
-				listabecas.getBecas().remove(i-1);
+				listaBecas.getBecas().remove(i-1);
 			}
 		}
-		mavBeca.addObject("beca", listabecas.getBecas());
+		mavBeca.addObject("beca", listaBecas.getBecas());
 		return mavBeca;
 	}
 	

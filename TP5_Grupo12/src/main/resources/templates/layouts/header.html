@@ -26,12 +26,12 @@
 						<li class="nav-item">
 							<a class="nav-link active"
 								aria-current="page" 
-								href="inicio">Inicio
+								th:href="@{/Cursos/inicio}">Inicio
 							</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="agenda">Agenda</a></li>
-						<li class="nav-item"><a class="nav-link" href="beneficios">Beneficios y Becas</a></li>
-						<li class="nav-item"><a class="nav-link" href="contacto">Contacto</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/Cursos/agenda}">Agenda</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/Cursos/beneficios}">Beneficios y Becas</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/Cursos/contacto}">Contacto</a></li>
 						<li class="nav-item dropdown">
 							<a	class="nav-link dropdown-toggle" 
 								id="navbarDropdown"
@@ -42,11 +42,11 @@
 							</a>
 							<ul class="dropdown-menu" 
 								aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="#">Docentes</a></li>
-								<li><a class="dropdown-item" href="#">Alumnos</a></li>
+								<li><a class="dropdown-item" th:href="@{/docente/mostrar}">Docentes</a></li>
+								<li><a class="dropdown-item" th:href="@{/alumno/mostrar}">Alumnos</a></li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#">Becas</a></li>
-								<li><a class="dropdown-item" href="#">Cursos</a></li>
+								<li><a class="dropdown-item" th:href="@{/beneficios/mostrar}">Becas</a></li>
+								<li><a class="dropdown-item" th:href="@{/cursos/mostrar}">Cursos</a></li>
 							</ul>
 						</li>
 					</ul>

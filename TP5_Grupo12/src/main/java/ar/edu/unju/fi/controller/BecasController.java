@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,21 +19,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import ar.edu.unju.fi.model.Beca;
-
+import ar.edu.unju.fi.service.IBecaService;
+import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.util.ListaBeca;
-
-
 
 
 @Controller
 @RequestMapping("/beneficios")
 public class BecasController {
-	ListaBeca listaBecas = new ListaBeca();
+	
+	@Autowired
+	@Qualifier("BecaServiceImpLista")
+	private IBecaService becaService;
+	
 	private static final Log LOGGER = LogFactory.getLog(BecasController.class);
 	
 	@GetMapping("/nuevo")
 	public String getFormNuevoBecaPage(Model model) {
-		model.addAttribute("beca", new Beca());
+		model.addAttribute("beca",becaService.getBeca());
 		return "nuevo_beca";
 	}
 	
@@ -47,26 +52,26 @@ public class BecasController {
 		}
 		
 		
-		ModelAndView mavbeca = new ModelAndView("mostrar_becas");
+		ModelAndView mavbeca = new ModelAndView("redirect:/beneficios/mostrar");
 		//ListaBeca listaBeca = new ListaBeca();
-		if (listaBecas.getBecas().add(beca)) {
+		if (becaService.guardarBeca(beca)) {
 			LOGGER.info("Se agregó un objeto al arrayList Becas");
 		}
-		mavbeca.addObject("beca", listaBecas.getBecas());
+		mavbeca.addObject("beca", becaService.getBeca());
 		return mavbeca; 
 	}
 	
 	@GetMapping("/mostrar")
 	public String getBecasPage(Model model) {
 		//ListaBeca listaBeca = new ListaBeca();
-		model.addAttribute("beca", listaBecas.getBecas());
+		model.addAttribute("beca", becaService.getListaBeca().getBecas());
 		return "mostrar_becas";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaBecasPage(Model model) {
 		//ListaBeca listaBeca = new ListaBeca();
-		model.addAttribute("beca", listaBecas.getBecas());
+		model.addAttribute("beca", becaService.getListaBeca().getBecas());
 		return "lista_beca";
 	}
 	
@@ -74,8 +79,8 @@ public class BecasController {
 	public ModelAndView getEditarBecaPage(@PathVariable(value="codigo")int codigo) {
 		//ListaBeca listabecas = new ListaBeca();
 		ModelAndView mav = new ModelAndView("edicion_beca");
-		Optional<Beca> beca = listaBecas.getBecas().stream().filter(a -> a.getCodigo() == codigo).findFirst();
-		mav.addObject("beca", beca);
+		Beca b = becaService.buscarBeca(codigo);
+		mav.addObject("beca", b);
 		return mav;
 	}
 	
@@ -88,7 +93,12 @@ public class BecasController {
 			return mav;
 		}
 		
-		ModelAndView mav = new ModelAndView("lista_beca");
+		ModelAndView mav = new ModelAndView("redirect:/beneficios/lista");
+		becaService.modificarBeca(beca);
+		return mav;
+		
+	}
+		/*ModelAndView mav = new ModelAndView("lista_beca");
 		for(Beca bec : listaBecas.getBecas()) {
 			if(bec.getCodigo() == beca.getCodigo()) {
 				bec.setCurso(beca.getCurso());
@@ -101,12 +111,15 @@ public class BecasController {
 		mav.addObject("beca", listaBecas.getBecas());
 		
 		return mav;
-	}
+	}*/
 
 	@GetMapping("/eliminar/{codigo}")
 	public ModelAndView getEliminarBecaPage(@PathVariable(value = "codigo") int codigo) {
-		ModelAndView mavBeca = new ModelAndView("lista_beca");
-		for (int i = listaBecas.getBecas().size(); i > 0; i--) {
+		ModelAndView mavBeca = new ModelAndView("redirect:/beneficios/lista");		
+		becaService.eliminarBeca(codigo);
+		LOGGER.info("Se eliminó beca" + codigo);		
+		return mavBeca;
+		/*for (int i = listaBecas.getBecas().size(); i > 0; i--) {
 			//if (can.getCodigo() == codigo) {
 			if (listaBecas.getBecas().get(i-1).getCodigo() == codigo) {
 				LOGGER.info("Se elimino Beca");
@@ -114,7 +127,7 @@ public class BecasController {
 			}
 		}
 		mavBeca.addObject("beca", listaBecas.getBecas());
-		return mavBeca;
+		return mavBeca;*/
 	}
 	
 

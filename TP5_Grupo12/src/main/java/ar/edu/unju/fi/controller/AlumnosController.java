@@ -50,7 +50,7 @@ public class AlumnosController {
 			
 		}
 		
-		ModelAndView mavalumno = new ModelAndView("mostrar_alumnos");
+		ModelAndView mavalumno = new ModelAndView("redirect:/alumno/mostrar");
 		//ListaAlumno listaAlumnos = new ListaAlumno();
 		if (alumnoService.guardarAlumno(alumno)) {
 			LOGGER.info("Se agregó un objeto al arrayList Alumnos");

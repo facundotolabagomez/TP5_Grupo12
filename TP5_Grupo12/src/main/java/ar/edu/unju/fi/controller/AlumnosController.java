@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,17 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.util.ListaAlumno;
 
 @Controller
 @RequestMapping("/alumno")
 public class AlumnosController {
-	ListaAlumno listaAlumnos = new ListaAlumno();
+	
+	@Autowired
+	@Qualifier("AlumnoServiceImpLista")
+	private IAlumnoService alumnoService;
+	
+	//ListaAlumno listaAlumnos = new ListaAlumno();
 	private static final Log LOGGER = LogFactory.getLog(AlumnosController.class);
 	
 	@GetMapping("/nuevo")
 	public String getFormNuevoAlumnoPage(Model model) {
-		model.addAttribute("alumno", new Alumno());
+		model.addAttribute("alumno", alumnoService.getAlumno());
 		return "nuevo_alumno";
 	}
 	
@@ -43,32 +51,31 @@ public class AlumnosController {
 		
 		ModelAndView mavalumno = new ModelAndView("mostrar_alumnos");
 		//ListaAlumno listaAlumnos = new ListaAlumno();
-		if (listaAlumnos.getAlumnos().add(alumno)) {
+		if (alumnoService.guardarAlumno(alumno)) {
 			LOGGER.info("Se agregó un objeto al arrayList Alumnos");
 		}
-		mavalumno.addObject("alumno", listaAlumnos.getAlumnos());
+		mavalumno.addObject("alumno", alumnoService.getListaAlumno());
 		return mavalumno; 
 	}
 	
 	@GetMapping("/mostrar")
 	public String getAlumnosPage(Model model) {
 		//ListaAlumno listaAlumnos = new ListaAlumno();
-		model.addAttribute("alumno", listaAlumnos.getAlumnos());
+		model.addAttribute("alumno", alumnoService.getListaAlumno());
 		return "mostrar_alumnos";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaAlumnosPage(Model model) {
 		//ListaAlumno listaAlumnos = new ListaAlumno();
-		model.addAttribute("alumno", listaAlumnos.getAlumnos());
+		model.addAttribute("alumno", alumnoService.getListaAlumno());
 		return "lista_alumnos";
 	}
 	
 	@GetMapping("/editar/{dni}")
 	public ModelAndView getEditarAlumnoPage(@PathVariable(value="dni")int dni) {
 		ModelAndView mav = new ModelAndView("edicion_alumno");
-		Optional<Alumno> alumno = listaAlumnos.getAlumnos().stream().filter(a -> a.getDni() == dni).findFirst();
-		mav.addObject("alumno", alumno);
+		mav.addObject("alumno", alumnoService.buscarAlumno(dni));
 		return mav;
 	}
 	
@@ -81,32 +88,20 @@ public class AlumnosController {
 			return mav;
 		}
 		
-		ModelAndView mav = new ModelAndView("lista_alumnos");
-		for(Alumno alum : listaAlumnos.getAlumnos()) {
-			if(alum.getDni() == alumno.getDni()) {
-				alum.setNombre(alumno.getNombre());
-				alum.setApellido(alumno.getApellido());
-				alum.setEmail(alumno.getEmail());
-				alum.setTelefono(alumno.getTelefono());
-			}
-			mav.addObject("alumno", alum);
-		}
-		mav.addObject("alumno", listaAlumnos.getAlumnos());
+		
+		ModelAndView mav = new ModelAndView("redirect:/alumno/lista");
+		alumnoService.modificarAlumno(alumno);
+		//mav.addObject("alumno", listaAlumnos.getAlumnos());
 		
 		return mav;
 	}
 	
 	@GetMapping("/eliminar/{dni}")
 	public ModelAndView getEliminarAlumnoPage(@PathVariable(value = "dni") int dni) {
-		ModelAndView mavAlumno = new ModelAndView("lista_alumnos");
-		for (int i = listaAlumnos.getAlumnos().size(); i > 0; i--) {
-			//if (can.getCodigo() == codigo) {
-			if (listaAlumnos.getAlumnos().get(i-1).getDni() == dni) {
-				LOGGER.info("Se elimino Alumno");
-				listaAlumnos.getAlumnos().remove(i-1);
-			}
-		}
-		mavAlumno.addObject("candidato", listaAlumnos.getAlumnos());
+		ModelAndView mavAlumno = new ModelAndView("redirect:/alumno/lista");
+		alumnoService.eliminarAlumno(dni);
+		LOGGER.info("Se eliminó el alumno");
+		//mavAlumno.addObject("candidato", listaAlumnos.getAlumnos());
 		return mavAlumno;
 	}
 }

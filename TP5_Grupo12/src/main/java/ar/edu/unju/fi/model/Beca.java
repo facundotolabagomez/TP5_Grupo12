@@ -10,7 +10,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Beca {
 	@Min(value=1, message = "Codigo No Valido")
 	private int codigo;

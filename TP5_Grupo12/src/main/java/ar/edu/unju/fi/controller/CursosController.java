@@ -1,9 +1,11 @@
 package ar.edu.unju.fi.controller;
 
-import java.util.Optional;
+
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,18 +20,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.model.Curso;
 
-import ar.edu.unju.fi.util.ListaCurso;
+import ar.edu.unju.fi.service.ICursoService;
+
+
 
 
 @Controller
 @RequestMapping("/cursos")
 public class CursosController {
-	ListaCurso listaCurso = new ListaCurso();
+	
+	@Autowired
+	@Qualifier("CursoServiceImpLista")
+	private ICursoService cursoService;
+	
 	private static final Log LOGGER = LogFactory.getLog(CursosController.class);
 	
 	@GetMapping("/nuevo")
 	public String getFormNuevoCursoPage(Model model) {
-		model.addAttribute("curso", new Curso());
+		model.addAttribute("curso", cursoService.getCurso());
 		return "nuevo_curso";
 	}
 	
@@ -43,34 +51,34 @@ public class CursosController {
 			return mav;
 			
 		}
-		ModelAndView mavcurso = new ModelAndView("mostrar_cursos");
+		ModelAndView mavcurso = new ModelAndView("redirect:/cursos/mostrar");
 		//ListaCurso listaCurso = new ListaCurso();
-		if (listaCurso.getCursos().add(curso)) {
+		if (cursoService.guardarCurso(curso)) {
 			LOGGER.info("Se agregó un objeto al arrayList Cursos");
 		}
-		mavcurso.addObject("curso", listaCurso.getCursos());
+		mavcurso.addObject("curso", cursoService.getListaCurso());
 		return mavcurso; 
 	}
 	
 	@GetMapping("/mostrar")
 	public String getCursosPage(Model model) {
 		//ListaCurso listaCurso = new ListaCurso();
-		model.addAttribute("curso", listaCurso.getCursos());
+		model.addAttribute("curso",cursoService.getListaCurso().getCursos());
 		return "mostrar_cursos";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaCursosPage(Model model) {
 		//ListaCurso listaCurso = new ListaCurso();
-		model.addAttribute("curso", listaCurso.getCursos());
+		model.addAttribute("curso", cursoService.getListaCurso().getCursos());
 		return "lista_cursos";
 	}
 	
 	@GetMapping("/editar/{codigo}")
 	public ModelAndView getEditarCursoPage(@PathVariable(value="codigo")int codigo) {
 		ModelAndView mav = new ModelAndView("edicion_curso");
-		Optional<Curso> curso = listaCurso.getCursos().stream().filter(a -> a.getCodigo() == codigo).findFirst();
-		mav.addObject("curso", curso);
+		Curso c = cursoService.buscarCurso(codigo);
+		mav.addObject("curso", c);
 		return mav;
 	}
 	
@@ -83,7 +91,11 @@ public class CursosController {
 			return mav;
 		}
 		
-		ModelAndView mav = new ModelAndView("lista_cursos");
+		ModelAndView mav = new ModelAndView("redirect:/cursos/lista");
+		cursoService.modificarCurso(curso);
+		return mav;
+		
+		/*ModelAndView mav = new ModelAndView("lista_cursos");
 		for(Curso cur : listaCurso.getCursos()) {
 			if(cur.getCodigo() == curso.getCodigo()) {
 				cur.setTitulo(curso.getTitulo());
@@ -97,20 +109,21 @@ public class CursosController {
 		}
 		mav.addObject("curso", listaCurso.getCursos());
 		
-		return mav;
+		return mav;*/
 	}
 	
 	@GetMapping("/eliminar/{codigo}")
 	public ModelAndView getEliminarCursoPage(@PathVariable(value = "codigo") int codigo) {
-		ModelAndView mavCurso = new ModelAndView("lista_cursos");
-		for (int i = listaCurso.getCursos().size(); i > 0; i--) {
+		ModelAndView mavCurso = new ModelAndView("redirect:/cursos/lista");
+		/*for (int i = listaCurso.getCursos().size(); i > 0; i--) {
 			//if (can.getCodigo() == codigo) {
 			if (listaCurso.getCursos().get(i-1).getCodigo() == codigo) {
 				LOGGER.info("Se elimino Curso");
 				listaCurso.getCursos().remove(i-1);
 			}
-		}
-		mavCurso.addObject("curso", listaCurso.getCursos());
+		}*/
+		cursoService.eliminarCurso(codigo);
+		LOGGER.info("Se eliminó el curso" + codigo);		
 		return mavCurso;
 	}
 }

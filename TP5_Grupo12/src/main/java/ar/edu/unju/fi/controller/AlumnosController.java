@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.controller;
 
-import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.model.Alumno;
 
 import ar.edu.unju.fi.service.IAlumnoService;
-import ar.edu.unju.fi.util.ListaAlumno;
+
 
 @Controller
 @RequestMapping("/alumno")

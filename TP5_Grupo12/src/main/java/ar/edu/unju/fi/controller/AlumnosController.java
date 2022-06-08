@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.model.Alumno;
+
 import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.util.ListaAlumno;
 
@@ -61,21 +62,22 @@ public class AlumnosController {
 	@GetMapping("/mostrar")
 	public String getAlumnosPage(Model model) {
 		//ListaAlumno listaAlumnos = new ListaAlumno();
-		model.addAttribute("alumno", alumnoService.getListaAlumno());
+		model.addAttribute("alumno", alumnoService.getListaAlumno().getAlumnos());
 		return "mostrar_alumnos";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaAlumnosPage(Model model) {
 		//ListaAlumno listaAlumnos = new ListaAlumno();
-		model.addAttribute("alumno", alumnoService.getListaAlumno());
+		model.addAttribute("alumno", alumnoService.getListaAlumno().getAlumnos());
 		return "lista_alumnos";
 	}
 	
 	@GetMapping("/editar/{dni}")
 	public ModelAndView getEditarAlumnoPage(@PathVariable(value="dni")int dni) {
 		ModelAndView mav = new ModelAndView("edicion_alumno");
-		mav.addObject("alumno", alumnoService.buscarAlumno(dni));
+		Alumno alumno = alumnoService.buscarAlumno(dni);
+		mav.addObject("alumno",alumno);
 		return mav;
 	}
 	

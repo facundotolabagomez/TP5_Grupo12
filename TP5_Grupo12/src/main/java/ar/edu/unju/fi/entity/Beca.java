@@ -52,6 +52,9 @@ public class Beca {
 	@NotEmpty (message = "Debe ingresar el Estado")
 	private String estado;
 	
+	@Column(name = "EXISTEBECA")	
+	private boolean existeBeca;
+	
 	public int getCodigo() {
 		return codigo;
 	}
@@ -82,9 +85,14 @@ public class Beca {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+		
 	
-	
-	
+	public boolean isExisteBeca() {
+		return existeBeca;
+	}
+	public void setExisteBeca(boolean existeBeca) {
+		this.existeBeca = existeBeca;
+	}
 	public long getBeca_id() {
 		return beca_id;
 	}

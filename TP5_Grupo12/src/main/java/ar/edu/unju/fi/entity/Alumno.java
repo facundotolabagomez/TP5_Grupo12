@@ -58,6 +58,10 @@ public class Alumno {
 	@NotNull (message= "Debe Seleccionar el Curso")
 	private List<Curso> cursos;
 	
+	@Column(name = "EXISTE_ALUM")	
+	private boolean existeAlumno;
+	
+	
 	public Alumno() {
 		// TODO Auto-generated constructor stub
 	}
@@ -118,6 +122,15 @@ public class Alumno {
 
 	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
+	}
+	
+	
+	public boolean isExisteAlumno() {
+		return existeAlumno;
+	}
+
+	public void setExisteAlumno(boolean existeAlumno) {
+		this.existeAlumno = existeAlumno;
 	}
 
 	public Alumno(int dni, String nombre, String apellido, String email, String telefono) {

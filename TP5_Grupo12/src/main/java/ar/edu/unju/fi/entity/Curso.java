@@ -65,6 +65,10 @@ public class Curso {
 	@NotNull(message="Debe seleccionar un docente")
 	private Docente docente;
 	
+	@Column(name = "EXISTECURSO")	
+	private boolean existeCurso;
+	
+	
 	public int getCodigo() {
 		return codigo;
 	}
@@ -122,9 +126,21 @@ public class Curso {
 	public void setCurso_id(long curso_id) {
 		this.curso_id = curso_id;
 	}
+	
+	
+	public boolean isExisteCurso() {
+		return existeCurso;
+	}
+	public void setExisteCurso(boolean existeCurso) {
+		this.existeCurso = existeCurso;
+	}
+	
+	
 	public Curso() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	public Curso(int codigo, String titulo, String categoria, LocalDate inicio, LocalDate fin, int cantidadDeHoras,
 			String modalidad, Docente docente) {
 		super();

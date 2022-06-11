@@ -1,7 +1,5 @@
 package ar.edu.unju.fi.controller;
 
-import java.util.Optional;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
-import ar.edu.unju.fi.model.Beca;
+import ar.edu.unju.fi.entity.Beca;
 import ar.edu.unju.fi.service.IBecaService;
-import ar.edu.unju.fi.service.IDocenteService;
-import ar.edu.unju.fi.util.ListaBeca;
+
 
 
 @Controller

@@ -1,7 +1,7 @@
 package ar.edu.unju.fi.service;
 
 
-import ar.edu.unju.fi.model.Beca;
+import ar.edu.unju.fi.entity.Beca;
 import ar.edu.unju.fi.util.ListaBeca;
 
 public interface IBecaService {

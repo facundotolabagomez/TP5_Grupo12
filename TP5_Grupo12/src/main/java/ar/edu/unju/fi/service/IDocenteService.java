@@ -1,6 +1,6 @@
 package ar.edu.unju.fi.service;
 
-import ar.edu.unju.fi.model.Docente;
+import ar.edu.unju.fi.entity.Docente;
 import ar.edu.unju.fi.util.ListaDocente;
 
 public interface IDocenteService {

@@ -1,29 +1,54 @@
-package ar.edu.unju.fi.model;
+package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
-@Component
+@Entity
+@Table(name="becas")
 public class Beca {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="BECAS_ID")
+	private long beca_id;
+	
+	@Column(name = "BECA_CODIGO", length = 5)
 	@Min(value=1, message = "Codigo No Valido")
 	private int codigo;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CURSO_ID")
 	@NotNull (message= "Debe Seleccionar el Curso")
-	private Curso curso; 
+	private Curso curso;
+	
+	@Column(name = "FECHA_INICIO", length = 10)
 	@NotNull(message="Debe ingresar Fecha de Inicio") @FutureOrPresent(message="La fecha debe ser hoy o posterior")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate inicio;
+	
+	@Column(name = "FECHA_CIERRE", length = 10)
 	@NotNull(message="Debe ingresar Fecha de Cierre")  @Future(message="La fecha debe ser posterior a la actual")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate cierre;
+	
+	@Column(name = "ESTADO", length = 10)
 	@NotEmpty (message = "Debe ingresar el Estado")
 	private String estado;
 	
@@ -58,6 +83,14 @@ public class Beca {
 		this.estado = estado;
 	}
 	
+	
+	
+	public long getBeca_id() {
+		return beca_id;
+	}
+	public void setBeca_id(long beca_id) {
+		this.beca_id = beca_id;
+	}
 	public Beca() {
 		// TODO Auto-generated constructor stub
 	}

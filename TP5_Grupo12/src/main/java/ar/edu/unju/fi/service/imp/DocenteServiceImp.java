@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.model.Docente;
+import ar.edu.unju.fi.entity.Docente;
 import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.util.ListaDocente;
 

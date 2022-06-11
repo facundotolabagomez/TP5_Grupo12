@@ -3,7 +3,8 @@ package ar.edu.unju.fi.service.imp;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ar.edu.unju.fi.model.Beca;
+
+import ar.edu.unju.fi.entity.Beca;
 import ar.edu.unju.fi.service.IBecaService;
 import ar.edu.unju.fi.util.ListaBeca;
 

@@ -1,7 +1,16 @@
-package ar.edu.unju.fi.model;
+package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Max;
@@ -10,28 +19,49 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
-@Component
+@Entity
+@Table(name="cursos")
 public class Curso {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="CURSO_ID")
+	private long curso_id;
+		
+	@Column(name = "CURSO_CODIGO", length = 5)
 	@Min(value=1, message="El valor mínimo es 1") @Max(value=9999,message="El valor máximo permitido es 9999")
 	private int codigo;
+	
+	@Column(name = "TITULO", length = 25)
 	@NotEmpty(message="El título no puede ser vacío")
 	private String titulo;
+	
+	@Column(name = "CATEGORIA", length = 25)
 	@NotEmpty(message="Categoría no puede ser vacío")
 	private String categoria;
+	
+	@Column(name = "FECHA_INICIO", length = 10)
 	@NotNull(message="Debe ingresar Fecha de Inicio") @FutureOrPresent(message="La fecha debe ser hoy o posterior")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate inicio;
+	
+	@Column(name = "FECHA_CIERRE", length = 10)
 	@NotNull(message="Debe ingresar Fecha de Fin") @Future(message="La fecha debe ser posterior a la actual")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate fin;
+	
+	@Column(name = "CANT_HORAS", length = 4)
 	@NotNull(message="Debe ingresar Cantidad de Horas")
 	@Min(value=1,message="Cantidad de horas debe ser mayor a 1")
 	private int cantidadDeHoras;
+	
+	@Column(name = "MODALIDAD", length = 15)
 	@NotEmpty(message="Debe ingresar Modalidad")
 	private String modalidad;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "DOCENTE_ID")
 	@NotNull(message="Debe seleccionar un docente")
 	private Docente docente;
 	
@@ -84,6 +114,14 @@ public class Curso {
 		this.docente = docente;
 	}
 	
+	
+	
+	public long getCurso_id() {
+		return curso_id;
+	}
+	public void setCurso_id(long curso_id) {
+		this.curso_id = curso_id;
+	}
 	public Curso() {
 		// TODO Auto-generated constructor stub
 	}

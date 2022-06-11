@@ -44,6 +44,9 @@ public class Docente {
 	@Size (min = 9,max = 14)
 	private String telefono;
 	
+	@Column(name = "EXISTE_DOC")	
+	private boolean existeDocente;
+	
 	public int getLegajo() {
 		return legajo;
 	}

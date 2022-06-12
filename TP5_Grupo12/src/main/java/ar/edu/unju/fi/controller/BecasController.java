@@ -60,14 +60,14 @@ public class BecasController {
 	@GetMapping("/mostrar")
 	public String getBecasPage(Model model) {
 		//ListaBeca listaBeca = new ListaBeca();
-		model.addAttribute("beca", becaService.getListaBeca().getBecas());
+		model.addAttribute("beca", becaService.getListaBeca());
 		return "mostrar_becas";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaBecasPage(Model model) {
 		//ListaBeca listaBeca = new ListaBeca();
-		model.addAttribute("beca", becaService.getListaBeca().getBecas());
+		model.addAttribute("beca", becaService.getListaBeca());
 		return "lista_beca";
 	}
 	

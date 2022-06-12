@@ -1,20 +1,21 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Alumno;
+import ar.edu.unju.fi.repository.IAlumnoRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
-import ar.edu.unju.fi.util.ListaAlumno;
+//import ar.edu.unju.fi.util.ListaAlumno;
 
-@Service("AlumnoServiceImpLista")
-public class AlumnoServiceImp implements IAlumnoService {
-	
+@Service("AlumnoServiceImpSql")
+public class AlumnoServiceImpSql implements IAlumnoService {
+
 	@Autowired
-	private ListaAlumno listaAlumno;
+	private IAlumnoRepository alumnoRepository;
 
 	@Override
 	public Alumno getAlumno() {
@@ -25,45 +26,39 @@ public class AlumnoServiceImp implements IAlumnoService {
 	@Override
 	public boolean guardarAlumno(Alumno alumno) {
 		// TODO Auto-generated method stub
-		return listaAlumno.getAlumnos().add(alumno);
+		alumno.setExisteAlumno(true);
+		if (alumnoRepository.save(alumno)!=null) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void modificarAlumno(Alumno alumno) {
 		// TODO Auto-generated method stub
-		for(Alumno alu : listaAlumno.getAlumnos()) {
-			if(alu.getDni() == alumno.getDni()) {
-				alu.setApellido(alumno.getApellido());
-				alu.setNombre(alumno.getNombre());
-				alu.setEmail(alumno.getEmail());
-				alu.setTelefono(alumno.getTelefono());
-			}
-		}
+		alumnoRepository.save(alumno);
 	}
 
 	@Override
 	public void eliminarAlumno(int dni) {
 		// TODO Auto-generated method stub
-		for (int i = listaAlumno.getAlumnos().size(); i > 0; i--) {
-			//if (can.getCodigo() == codigo) {
-			if (listaAlumno.getAlumnos().get(i-1).getDni() == dni) {
-				listaAlumno.getAlumnos().remove(i-1);
-			}
-		}
+		Alumno alumno = buscarAlumno(dni);
+		alumno.setExisteAlumno(false);
+		alumnoRepository.save(alumno);
+		//alumnoRepository.deleteByDni(dni);
 
 	}
 
 	@Override
 	public List<Alumno> getListaAlumno() {
 		// TODO Auto-generated method stub
-		return null;
+		return alumnoRepository.findByExisteAlumno(true);
 	}
 
 	@Override
 	public Alumno buscarAlumno(int dni) {
 		// TODO Auto-generated method stub
-		Optional<Alumno> alumno = listaAlumno.getAlumnos().stream().filter(a -> a.getDni() == dni).findFirst();
-		return alumno.get();
+		return alumnoRepository.findByDniAndExisteAlumno(dni, true);
 	}
 
 }

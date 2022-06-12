@@ -10,6 +10,7 @@ import ar.edu.unju.fi.entity.Docente;
 
 public interface IDocenteRepository extends JpaRepository<Docente, Long> {
 
+	/*
 	@Modifying
 	@Query("delete from Curso c where c.codigo = ?1")
 	public void deleteByLegajo(int legajo);
@@ -25,4 +26,5 @@ public interface IDocenteRepository extends JpaRepository<Docente, Long> {
 	public List<Docente> ordenarPorLegajo();
 	
 	public List<Docente> findByLegajoAndExisteDocente(int legajo, boolean existeDocente);
+	*/
 }

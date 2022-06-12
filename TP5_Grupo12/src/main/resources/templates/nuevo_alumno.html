@@ -41,6 +41,15 @@
 							<input th:field="*{telefono}" type="text" class="form-control"	id="TelefonoId">
 							<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
 						</div>
+						<div class="mb-3">
+						<label for="cursoid" class=form-label>Curso</label>
+						<select th:field="*{curso.id}" class="form-control" id="cursoid">
+							<option th:each="curso: ${curso}" th:value="${curso.codigo}"
+								th:text="${curso.titulo}" />
+						</select> 
+						<div class="text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></div>
+						</div>
+						
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</form>
 	           </section>

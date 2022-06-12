@@ -1,7 +1,9 @@
 package ar.edu.unju.fi.service;
 
+import java.util.List;
+
 import ar.edu.unju.fi.entity.Alumno;
-import ar.edu.unju.fi.util.ListaAlumno;
+//import ar.edu.unju.fi.util.ListaAlumno;
 
 public interface IAlumnoService {
 	
@@ -9,7 +11,7 @@ public interface IAlumnoService {
 	public boolean guardarAlumno(Alumno alumno);
 	public void modificarAlumno (Alumno alumno);
 	public void eliminarAlumno (int dni);
-	public ListaAlumno getListaAlumno();
+	public List<Alumno> getListaAlumno();
 	public Alumno buscarAlumno (int dni);
 
 }

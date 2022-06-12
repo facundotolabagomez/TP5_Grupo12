@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import ar.edu.unju.fi.entity.Alumno;
 
-
-
 public interface IAlumnoRepository extends JpaRepository<Alumno, Long> {
 
 	@Modifying
@@ -20,13 +18,17 @@ public interface IAlumnoRepository extends JpaRepository<Alumno, Long> {
 	
 	public List<Alumno> findByExisteAlumno(boolean existeAlumno);	
 	
-	@Query("select a from Alumno a order by a.alumno.apellido")
-	public List<Alumno> ordenarPorApellido();	
+	/*
+	 * @Query("select a from Alumno a order by a.alumno.apellido") public
+	 * List<Alumno> ordenarPorApellido();
+	 */	
 	
-	@Query("select a from Alumno a order by a.alumno.dni")
-	public List<Alumno> ordenarPorDni();
+	/*
+	 * @Query("select a from Alumno a order by a.alumno.dni") public List<Alumno>
+	 * ordenarPorDni();
+	 */
 	
-	public List<Alumno> findByDniAndExisteAlumno(int dni, boolean existeAlumno);
+	public Alumno findByDniAndExisteAlumno(int dni, boolean existeAlumno);
 
 	
 }

@@ -2,10 +2,10 @@ package ar.edu.unju.fi.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+
 //import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,6 +22,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="alumnos")
 public class Alumno {
+	
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,15 +50,16 @@ public class Alumno {
 	private String email;
 	
 	@Column(name = "TELEFONO", length = 14)
-	@NotEmpty(message = "Debe completar el Telefono")
+	//@NotEmpty(message = "Debe completar el Telefono")
 	@NotNull (message = "Debe completar el Telefono")
 	@Size(min=9, max=14)
 	private String telefono;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="curso")
 	@JoinColumn(name = "CURSO_ID")
-	@NotNull (message= "Debe Seleccionar el Curso")
-	private List<Curso> cursos;
+	/*@NotNull (message= "Debe Seleccionar el Curso")*/
+	//private List<Curso> = new List cursoRepository.findbyExisteCurso(true);
+	private List <Curso> cursos;
 	
 	@Column(name = "EXISTE_ALUM")	
 	private boolean existeAlumno;
@@ -116,13 +119,11 @@ public class Alumno {
 		this.alumno_id = alumno_id;
 	}
 
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
+	
+	  public List<Curso> getCursos() { return cursos; }
+	  
+	  public void setCursos(List<Curso> cursos) { this.cursos = cursos; }
+	 
 	
 	
 	public boolean isExisteAlumno() {

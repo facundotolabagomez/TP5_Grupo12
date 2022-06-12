@@ -1,22 +1,19 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ar.edu.unju.fi.entity.Beca;
+import ar.edu.unju.fi.repository.IBecaRepository;
 import ar.edu.unju.fi.service.IBecaService;
-import ar.edu.unju.fi.util.ListaBeca;
 
+@Service
+public class BecaServiceImpSql implements IBecaService{
 
-@Service("BecaServiceImpLista")
-public class BecaServiceImp implements IBecaService {
-	
 	@Autowired
-	private ListaBeca listaBeca;
+	private IBecaRepository becaRepository;
 	
-
 	@Override
 	public Beca getBeca() {
 		// TODO Auto-generated method stub
@@ -26,45 +23,38 @@ public class BecaServiceImp implements IBecaService {
 	@Override
 	public boolean guardarBeca(Beca beca) {
 		// TODO Auto-generated method stub
-		return listaBeca.getBecas().add(beca);
+		beca.setExisteBeca(true);
+		if (becaRepository.save(beca)!=null) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void modificarBeca(Beca beca) {
 		// TODO Auto-generated method stub
-		for(Beca b : listaBeca.getBecas()) {
-			if(b.getCodigo() == beca.getCodigo()) {
-				b.setCurso(beca.getCurso());
-				b.setInicio(beca.getInicio());
-				b.setCierre(beca.getCierre());
-				b.setEstado(beca.getEstado());
-			}
-		}
-		
+		becaRepository.save(beca);
 	}
 
 	@Override
 	public void eliminarBeca(int codigo) {
 		// TODO Auto-generated method stub
-	for (int i = listaBeca.getBecas().size(); i > 0; i--) {
-				
-				if (listaBeca.getBecas().get(i-1).getCodigo() == codigo) {
-					listaBeca.getBecas().remove(i-1);
-				}
-			}
+		Beca beca = buscarBeca(codigo);
+		beca.setExisteBeca(false);
+		becaRepository.save(beca);
+		
 	}
 
 	@Override
 	public List<Beca> getListaBeca() {
 		// TODO Auto-generated method stub
-		return null;
+		return  becaRepository.findByExisteBeca(true);
 	}
 
 	@Override
 	public Beca buscarBeca(int codigo) {
 		// TODO Auto-generated method stub
-		Optional<Beca> beca = listaBeca.getBecas().stream().filter(a -> a.getCodigo() == codigo).findFirst();
-		return beca.get();
+		return becaRepository.findByCodigoAndExisteBeca(codigo, true);
 	}
 
 }

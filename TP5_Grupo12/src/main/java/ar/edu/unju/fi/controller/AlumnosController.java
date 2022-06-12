@@ -20,12 +20,13 @@ import ar.edu.unju.fi.entity.Alumno;
 import ar.edu.unju.fi.service.IAlumnoService;
 
 
+
 @Controller
 @RequestMapping("/alumno")
 public class AlumnosController {
 	
 	@Autowired
-	@Qualifier("AlumnoServiceImpLista")
+	@Qualifier("AlumnoServiceImpSql")//cambiar sql
 	private IAlumnoService alumnoService;
 	
 	//ListaAlumno listaAlumnos = new ListaAlumno();
@@ -33,6 +34,7 @@ public class AlumnosController {
 	
 	@GetMapping("/nuevo")
 	public String getFormNuevoAlumnoPage(Model model) {
+		//model.addAttribute("curso", CursoServiceImp.getListaCurso().getCursos());
 		model.addAttribute("alumno", alumnoService.getAlumno());
 		return "nuevo_alumno";
 	}
@@ -60,14 +62,14 @@ public class AlumnosController {
 	@GetMapping("/mostrar")
 	public String getAlumnosPage(Model model) {
 		//ListaAlumno listaAlumnos = new ListaAlumno();
-		model.addAttribute("alumno", alumnoService.getListaAlumno().getAlumnos());
+		model.addAttribute("alumno", alumnoService.getListaAlumno());
 		return "mostrar_alumnos";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaAlumnosPage(Model model) {
 		//ListaAlumno listaAlumnos = new ListaAlumno();
-		model.addAttribute("alumno", alumnoService.getListaAlumno().getAlumnos());
+		model.addAttribute("alumno", alumnoService.getListaAlumno());
 		return "lista_alumnos";
 	}
 	

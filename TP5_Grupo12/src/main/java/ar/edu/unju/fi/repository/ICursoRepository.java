@@ -13,22 +13,26 @@ import ar.edu.unju.fi.entity.Curso;
 @Repository
 public interface ICursoRepository extends JpaRepository<Curso, Long> {
 
-	@Modifying
-	@Query("delete from Curso c where c.codigo = ?1")
-	public void deleteByCodigo(int codigo);
-	
-	public Curso findByCodigo(int codigo);
-	
-	public List<Curso> findByExisteCurso(boolean existeCurso);
-	
-	public List<Curso> findByInicio(LocalDate Inicio, LocalDate Fin);
-	
-	@Query("select c from Curso c order by c.docente.apellido")
-	public List<Curso> ordenarPorApellidoDocente();
-	
-	public List<Curso> findByCategoriaAndModalidad(String categoria, String modalidad);
-	
-	public List<Curso> findByTituloContaining(String cadena);
-	
-	public List<Curso> findByDocenteLegajoAndExisteCurso(int legajo, boolean existeCurso);
+	/*
+	  @Modifying
+	  @Query("delete from Curso c where c.codigo = ?1") public void
+	  deleteByCodigo(int codigo);
+	  
+	  public Curso findByCodigo(int codigo);
+	  
+	  public List<Curso> findByExisteCurso(boolean existeCurso);
+	  
+	  public List<Curso> findByInicio(LocalDate Inicio, LocalDate Fin);
+	  
+	  @Query("select c from Curso c order by c.docente.apellido") public
+	  List<Curso> ordenarPorApellidoDocente();
+	  
+	  public List<Curso> findByCategoriaAndModalidad(String categoria, String
+	  modalidad);
+	  
+	  public List<Curso> findByTituloContaining(String cadena);
+	  
+	  public List<Curso> findByDocenteLegajoAndExisteCurso(int legajo, boolean existeCurso);
+	  */
+	 
 }

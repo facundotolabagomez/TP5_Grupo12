@@ -13,20 +13,22 @@ import ar.edu.unju.fi.entity.Beca;
 
 public interface IBecaRepository extends JpaRepository<Beca, Long>  {
 	
-	@Modifying
-	@Query("delete from Beca b where b.codigo = ?1")
-	public void deleteByCodigo(int codigo);
-	
-	public Beca findByCodigo(int codigo);
-	
-	public List<Beca> findByExisteBeca(boolean existeBeca);
-	
-	public List<Beca> findByInicio(LocalDate inicio, LocalDate cierre);
-	
-	@Query("select b from Beca b order by b.beca.inicio")
-	public List<Beca> ordenarPorInicio();
-	
-	public List<Beca> findByEstado(String estado);
-	
+	/*
+	 * @Modifying
+	 * 
+	 * @Query("delete from Beca b where b.codigo = ?1") public void
+	 * deleteByCodigo(int codigo);
+	 * 
+	 * public Beca findByCodigo(int codigo);
+	 * 
+	 * public List<Beca> findByExisteBeca(boolean existeBeca);
+	 * 
+	 * public List<Beca> findByInicio(LocalDate inicio, LocalDate cierre);
+	 * 
+	 * @Query("select b from Beca b order by b.beca.inicio") public List<Beca>
+	 * ordenarPorInicio();
+	 * 
+	 * public List<Beca> findByEstado(String estado);
+	 */
 
 }

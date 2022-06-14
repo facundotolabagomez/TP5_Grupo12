@@ -25,7 +25,7 @@ import ar.edu.unju.fi.service.IBecaService;
 public class BecasController {
 	
 	@Autowired
-	@Qualifier("BecaServiceImpLista")
+	@Qualifier("BecaServiceImpSql")
 	private IBecaService becaService;
 	
 	private static final Log LOGGER = LogFactory.getLog(BecasController.class);

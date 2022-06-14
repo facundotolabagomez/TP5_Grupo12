@@ -28,7 +28,7 @@ import ar.edu.unju.fi.service.ICursoService;
 public class CursosController {
 	
 	@Autowired
-	@Qualifier("CursoServiceImpLista")
+	@Qualifier("CursoServiceImpSql")
 	private ICursoService cursoService;
 	
 	private static final Log LOGGER = LogFactory.getLog(CursosController.class);
@@ -61,21 +61,21 @@ public class CursosController {
 	@GetMapping("/mostrar")
 	public String getCursosPage(Model model) {
 		//ListaCurso listaCurso = new ListaCurso();
-		model.addAttribute("curso",cursoService.getListaCurso().getCursos());
+		model.addAttribute("curso",cursoService.getListaCurso());
 		return "mostrar_cursos";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaCursosPage(Model model) {
 		//ListaCurso listaCurso = new ListaCurso();
-		model.addAttribute("curso", cursoService.getListaCurso().getCursos());
+		model.addAttribute("curso", cursoService.getListaCurso());
 		return "lista_cursos";
 	}
 	
 	@GetMapping("/editar/{codigo}")
 	public ModelAndView getEditarCursoPage(@PathVariable(value="codigo")int codigo) {
 		ModelAndView mav = new ModelAndView("edicion_curso");
-		Curso c = cursoService.buscarCurso(codigo);
+		Curso c = cursoService.buscarCurso(codigo,true);
 		mav.addObject("curso", c);
 		return mav;
 	}

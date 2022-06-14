@@ -2,7 +2,7 @@ package ar.edu.unju.fi.entity;
 
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -55,10 +56,10 @@ public class Alumno {
 	@Size(min=9, max=14)
 	private String telefono;
 	
-	@ManyToMany(mappedBy="curso")
-	@JoinColumn(name = "CURSO_ID")
-	/*@NotNull (message= "Debe Seleccionar el Curso")*/
-	//private List<Curso> = new List cursoRepository.findbyExisteCurso(true);
+	@JoinTable(name= "rel_alumnos_cursos",
+			joinColumns=@JoinColumn(name="ALUMNO_ID"),
+			inverseJoinColumns=@JoinColumn(name="CURSO_ID"))
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List <Curso> cursos;
 	
 	@Column(name = "EXISTE_ALUM")	

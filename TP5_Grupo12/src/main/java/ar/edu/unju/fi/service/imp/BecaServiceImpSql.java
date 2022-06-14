@@ -8,7 +8,7 @@ import ar.edu.unju.fi.entity.Beca;
 import ar.edu.unju.fi.repository.IBecaRepository;
 import ar.edu.unju.fi.service.IBecaService;
 
-@Service
+@Service("BecaServiceImpSql")
 public class BecaServiceImpSql implements IBecaService{
 
 	@Autowired

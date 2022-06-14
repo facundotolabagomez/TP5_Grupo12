@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
@@ -64,6 +66,10 @@ public class Curso {
 	@JoinColumn(name = "DOCENTE_ID")
 	@NotNull(message="Debe seleccionar un docente")
 	private Docente docente;
+	
+	@ManyToMany(mappedBy="cursos")
+	private List<Alumno> alumno;
+	
 	
 	@Column(name = "EXISTECURSO")	
 	private boolean existeCurso;

@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Alumno;
 import ar.edu.unju.fi.service.IAlumnoService;
-
+import ar.edu.unju.fi.service.ICursoService;
 
 
 @Controller
@@ -29,12 +29,17 @@ public class AlumnosController {
 	@Qualifier("AlumnoServiceImpSql")//cambiar sql
 	private IAlumnoService alumnoService;
 	
+	@Autowired
+	@Qualifier("CursoServiceImpSql")
+	private ICursoService cursoService;
+	
 	//ListaAlumno listaAlumnos = new ListaAlumno();
 	private static final Log LOGGER = LogFactory.getLog(AlumnosController.class);
 	
 	@GetMapping("/nuevo")
 	public String getFormNuevoAlumnoPage(Model model) {
-		//model.addAttribute("curso", CursoServiceImp.getListaCurso().getCursos());
+		//System.out.println(cursoService.getListaCurso().size());
+		model.addAttribute("curso", cursoService.getCurso());
 		model.addAttribute("alumno", alumnoService.getAlumno());
 		return "nuevo_alumno";
 	}

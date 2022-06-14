@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.service.imp;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,13 +57,13 @@ public class CursoServiceImp implements ICursoService {
 	}
 
 	@Override
-	public ListaCurso getListaCurso() {
+	public List<Curso> getListaCurso() {
 		// TODO Auto-generated method stub
-		return listaCurso;
+		return null;
 	}
 
 	@Override
-	public Curso buscarCurso(int codigo) {
+	public Curso buscarCurso(int codigo,boolean existeCurso) {
 		// TODO Auto-generated method stub
 
 		Optional<Curso> curso = listaCurso.getCursos().stream().filter(a -> a.getCodigo() == codigo).findFirst();

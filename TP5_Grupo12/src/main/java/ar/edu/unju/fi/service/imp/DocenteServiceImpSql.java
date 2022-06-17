@@ -1,20 +1,20 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Docente;
+import ar.edu.unju.fi.repository.IDocenteRepository;
 import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.util.ListaDocente;
 
-@Service("DocenteServiceImpLista")
-public class DocenteServiceImp implements IDocenteService {
+@Service("DocenteServiceImpSql")
+public class DocenteServiceImpSql implements IDocenteService {
 	
 	@Autowired
-	private ListaDocente listaDocente;
+	private IDocenteRepository docenteRepository;
 
 	@Override
 	public Docente getDocente() {
@@ -25,46 +25,40 @@ public class DocenteServiceImp implements IDocenteService {
 	@Override
 	public boolean guardarDocente(Docente docente) {
 		// TODO Auto-generated method stub
-		return listaDocente.getDocentes().add(docente);
+		docente.setExisteDocente(true);
+		if (docenteRepository.save(docente)!=null) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void modificarDocente(Docente docente) {
 		// TODO Auto-generated method stub
-		for(Docente d : listaDocente.getDocentes()) {
-			if(d.getLegajo() == docente.getLegajo()) {
-				d.setApellido(docente.getApellido());
-				d.setNombre(docente.getNombre());
-				d.setEmail(docente.getEmail());
-				d.setTelefono(docente.getTelefono());
-			}
-		}
+		docenteRepository.save(docente);
+
 	}
 
 	@Override
 	public void eliminarDocente(int legajo) {
 		// TODO Auto-generated method stub
-		for (int i = listaDocente.getDocentes().size(); i > 0; i--) {
-			
-			if (listaDocente.getDocentes().get(i-1).getLegajo() == legajo) {
-				listaDocente.getDocentes().remove(i-1);
-			}
-		}
+		Docente docente = buscarDocente(legajo);
+		docente.setExisteDocente(false);
+		docenteRepository.save(docente);
+		//docenteRepository.deleteByLegajo(legajo);
+
 	}
 
 	@Override
 	public List<Docente> getListaDocente() {
 		// TODO Auto-generated method stub
-		//return listaDocente;
-		return null;
+		return docenteRepository.findByExisteDocente(true);
 	}
 
 	@Override
 	public Docente buscarDocente(int legajo) {
 		// TODO Auto-generated method stub
-		Optional<Docente> docente = listaDocente.getDocentes().stream().filter(a -> a.getLegajo() == legajo).findFirst();
-		return docente.get();
-		
+		return docenteRepository.findByLegajoAndExisteDocente(legajo , true);
 	}
 
 }

@@ -20,11 +20,13 @@ public interface ICursoRepository extends JpaRepository<Curso, Long> {
 	  
 	  public Curso findByCodigo(int codigo);
 	  
-	  */public List<Curso> findByExisteCurso(boolean existeCurso);
+	  */
+	  public List<Curso> findByExisteCurso(boolean existeCurso);
 	  
 	  public Curso findByCodigoAndExisteCurso(int codigo, boolean existeCurso);
 	  
-	  /*public List<Curso> findByInicio(LocalDate Inicio, LocalDate Fin);
+	  /*
+	  public List<Curso> findByInicio(LocalDate Inicio, LocalDate Fin);
 	  
 	  @Query("select c from Curso c order by c.docente.apellido") public
 	  List<Curso> ordenarPorApellidoDocente();

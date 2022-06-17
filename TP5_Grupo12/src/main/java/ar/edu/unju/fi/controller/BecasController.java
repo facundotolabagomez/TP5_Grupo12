@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Beca;
+import ar.edu.unju.fi.entity.Curso;
 import ar.edu.unju.fi.service.IBecaService;
+import ar.edu.unju.fi.service.ICursoService;
 
 
 
@@ -28,10 +30,15 @@ public class BecasController {
 	@Qualifier("BecaServiceImpSql")
 	private IBecaService becaService;
 	
+	@Autowired
+	@Qualifier("CursoServiceImpSql")
+	private ICursoService cursoService;
+	
 	private static final Log LOGGER = LogFactory.getLog(BecasController.class);
 	
 	@GetMapping("/nuevo")
 	public String getFormNuevoBecaPage(Model model) {
+		model.addAttribute("curso",cursoService.getListaCurso());
 		model.addAttribute("beca",becaService.getBeca());
 		return "nuevo_beca";
 	}
@@ -42,6 +49,7 @@ public class BecasController {
 			LOGGER.error("No se cumplen las reglas de validación");
 
 			ModelAndView mav = new ModelAndView("nuevo_beca");
+			mav.addObject("curso",cursoService.getListaCurso());
 			mav.addObject("beca",beca);
 			return mav;
 			
@@ -50,6 +58,8 @@ public class BecasController {
 		
 		ModelAndView mavbeca = new ModelAndView("redirect:/beneficios/mostrar");
 		//ListaBeca listaBeca = new ListaBeca();
+		Curso curso = cursoService.buscarCurso(beca.getCurso().getCodigo(), true);
+		beca.setCurso(curso);
 		if (becaService.guardarBeca(beca)) {
 			LOGGER.info("Se agregó un objeto al arrayList Becas");
 		}

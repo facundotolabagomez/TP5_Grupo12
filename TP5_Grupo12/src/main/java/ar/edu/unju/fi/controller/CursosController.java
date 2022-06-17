@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Curso;
+import ar.edu.unju.fi.entity.Docente;
 import ar.edu.unju.fi.service.ICursoService;
+import ar.edu.unju.fi.service.IDocenteService;
 
 
 
@@ -31,11 +33,16 @@ public class CursosController {
 	@Qualifier("CursoServiceImpSql")
 	private ICursoService cursoService;
 	
+	@Autowired
+	@Qualifier("DocenteServiceImpSql")
+	private IDocenteService docenteService;
+	
 	private static final Log LOGGER = LogFactory.getLog(CursosController.class);
 	
 	@GetMapping("/nuevo")
 	public String getFormNuevoCursoPage(Model model) {
 		model.addAttribute("curso", cursoService.getCurso());
+		model.addAttribute("docentes", docenteService.getListaDocente());
 		return "nuevo_curso";
 	}
 	
@@ -46,11 +53,14 @@ public class CursosController {
 
 			ModelAndView mav = new ModelAndView("nuevo_curso");
 			mav.addObject("curso", curso);
+			mav.addObject("docentes", docenteService.getListaDocente());
 			return mav;
 			
 		}
 		ModelAndView mavcurso = new ModelAndView("redirect:/cursos/mostrar");
 		//ListaCurso listaCurso = new ListaCurso();
+		Docente docente = docenteService.buscarDocente(curso.getDocente().getLegajo());
+		curso.setDocente(docente);
 		if (cursoService.guardarCurso(curso)) {
 			LOGGER.info("Se agregó un objeto al arrayList Cursos");
 		}

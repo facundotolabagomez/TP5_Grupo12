@@ -32,12 +32,12 @@
 						</div>
 						<div class="mb-3">
 							<label for="InputInicio" class="form-label">Inicio</label> 
-							<input th:field="*{inicio}" type="text" class="form-control" id="InputInicio" placeholder="2007-12-03">
+							<input th:field="*{inicio}" type="date" class="form-control" id="InputInicio" >
 							<div class="text-danger" th:if="${#fields.hasErrors('inicio')}" th:errors="*{inicio}"></div> 
 						</div>
 						<div class="mb-3">
 							<label for="InputFin" class="form-label">Fin</label>
-							<input th:field="*{fin}" type="text" class="form-control" id="InputFin" placeholder="2007-12-03">
+							<input th:field="*{fin}" type="date" class="form-control" id="InputFin"  >
 							<div class="text-danger" th:if="${#fields.hasErrors('fin')}" th:errors="*{fin}"></div>
 						</div>
 						<div class="mb-3">
@@ -51,10 +51,20 @@
 							<div class="text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></div>
 						</div>
 						<div class="mb-3">
+							<label for="docenteId" class="form-label">Docente</label> 
+							<select th:field="*{docente.legajo}" class="form-control" id="docenteId">
+								<option th:each="docente : ${docentes}"
+									th:value="${docente.legajo}"
+									th:text="'Apellido: '+${docente.apellido}+', Nombre: '+${docente.nombre} " />
+							</select>
+							<div class="text-danger" th:if="${#fields.hasErrors('docente')}" th:errors="*{docente}"></div>
+						</div>
+
+					<!-- <div class="mb-3">
 							<label for="InputEstado" class="form-label">Docente</label>
 							<input th:field="*{docente.legajo}" type="text" class="form-control" id="InputEstado">
 							<div class="text-danger" th:if="${#fields.hasErrors('docente')}" th:errors="*{docente}"></div> 
-						</div>
+						</div> -->
 						
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</form>

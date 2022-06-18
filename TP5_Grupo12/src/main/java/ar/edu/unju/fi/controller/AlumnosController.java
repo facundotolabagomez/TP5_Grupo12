@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.controller;
 
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Alumno;
+import ar.edu.unju.fi.entity.Curso;
 import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.service.ICursoService;
 
@@ -39,7 +42,7 @@ public class AlumnosController {
 	@GetMapping("/nuevo")
 	public String getFormNuevoAlumnoPage(Model model) {
 		//System.out.println(cursoService.getListaCurso().size());
-		model.addAttribute("curso", cursoService.getCurso());
+		model.addAttribute("curso", cursoService.getListaCurso());
 		model.addAttribute("alumno", alumnoService.getAlumno());
 		return "nuevo_alumno";
 	}
@@ -51,11 +54,17 @@ public class AlumnosController {
 
 			ModelAndView mav = new ModelAndView("nuevo_alumno");
 			mav.addObject("alumno", alumno);
+			mav.addObject("curso", cursoService.getListaCurso());
 			return mav;
-			
 		}
 		
 		ModelAndView mavalumno = new ModelAndView("redirect:/alumno/mostrar");
+		/*
+		 * List <Curso> curso = null; for(int i=0;i < alumno.getCursos().size();i++) {
+		 * Curso e = new Curso(); e.setCodigo(alumno.getCursos().get(i).getCodigo());
+		 * cursoService.buscarCurso(e.getCodigo(), true); curso.add(e); }
+		 */
+		//Curso curso = cursoService.buscarCurso(alumno.getCursos().get(alumno.), true);
 		//ListaAlumno listaAlumnos = new ListaAlumno();
 		if (alumnoService.guardarAlumno(alumno)) {
 			LOGGER.info("Se agregó un objeto al arrayList Alumnos");

@@ -19,19 +19,30 @@
 						<input th:field="*{codigo}" type="number" class="form-control"	id="CodigoId">
 						<div class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
 					</div>
+					
 					<div class="mb-3">
+							<label for="cursoId" class="form-label">Curso</label> 
+							<select th:field="*{curso.codigo}" class="form-control" id="cursoId">
+								<option th:each="curso : ${curso}"
+									th:value="${curso.codigo}"
+									th:text="${curso.titulo}+'  -  '+${curso.categoria}" />
+							</select>
+							<div class="text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></div>
+						</div>
+					
+					<!-- <div class="mb-3">
 						<label for="CursoId" class="form-label">Curso</label>
 						<input th:field="*{curso}" type="text" class="form-control"	id="CursoId">
 						<div class="text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></div>
-					</div>
+					</div> -->
 					<div class="mb-3">
 						<label for="InputInicio" class="form-label">Inicio</label>
-						<input th:field="*{inicio}" type="text" class="form-control" id="InputInicio" placeholder="2007-12-03">
+						<input th:field="*{inicio}" type="date" class="form-control" id="InputInicio">
 						<div class="text-danger" th:if="${#fields.hasErrors('inicio')}" th:errors="*{inicio}"></div>
 					</div>
 					<div class="mb-3">
 						<label for="InputCierre" class="form-label">Cierre</label> 
-						<input th:field="*{cierre}" type="text" class="form-control" id="InputCierre" placeholder="2007-12-03"> 
+						<input th:field="*{cierre}" type="date" class="form-control" id="InputCierre" > 
 						<div class="text-danger" th:if="${#fields.hasErrors('cierre')}" th:errors="*{cierre}"></div>
 					</div>
 					<div class="mb-3">

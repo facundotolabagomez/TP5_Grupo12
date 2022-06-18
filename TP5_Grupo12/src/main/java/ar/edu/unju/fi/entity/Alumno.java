@@ -56,10 +56,13 @@ public class Alumno {
 	@Size(min=9, max=14)
 	private String telefono;
 	
-	@JoinTable(name= "rel_alumnos_cursos",
-			joinColumns=@JoinColumn(name="ALUMNO_ID"),
-			inverseJoinColumns=@JoinColumn(name="CURSO_ID"))
 	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name= "rel_alumnos_cursos",
+			joinColumns= {@JoinColumn(name="ALUMNO_ID")},
+			inverseJoinColumns= {@JoinColumn(name="CURSO_ID")}
+			)
+	
 	private List <Curso> cursos;
 	
 	@Column(name = "EXISTE_ALUM")	
@@ -121,18 +124,22 @@ public class Alumno {
 	}
 
 	
-	  public List<Curso> getCursos() { return cursos; }
-	  
-	  public void setCursos(List<Curso> cursos) { this.cursos = cursos; }
-	 
-	
-	
 	public boolean isExisteAlumno() {
 		return existeAlumno;
 	}
 
 	public void setExisteAlumno(boolean existeAlumno) {
 		this.existeAlumno = existeAlumno;
+	}
+
+	
+	
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	public Alumno(int dni, String nombre, String apellido, String email, String telefono) {

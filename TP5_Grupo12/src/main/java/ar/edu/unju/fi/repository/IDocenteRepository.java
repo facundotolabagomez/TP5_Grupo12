@@ -14,17 +14,19 @@ public interface IDocenteRepository extends JpaRepository<Docente, Long> {
 	@Modifying
 	@Query("delete from Curso c where c.codigo = ?1")
 	public void deleteByLegajo(int legajo);
-	
+	*/
 	public Docente findByLegajo(int legajo);
 	
 	public List<Docente> findByExisteDocente(boolean existeDocente);	
 	
+	/*
 	@Query("select d from Docente d order by d.docente.apellido")
 	public List<Docente> ordenarPorApellido();	
 	
 	@Query("select d from Docente d order by d.docente.legajo")
 	public List<Docente> ordenarPorLegajo();
-	
-	public List<Docente> findByLegajoAndExisteDocente(int legajo, boolean existeDocente);
 	*/
+	
+	public Docente findByLegajoAndExisteDocente(int legajo, boolean existeDocente);
+	
 }

@@ -3,6 +3,7 @@ package ar.edu.unju.fi.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -62,10 +63,12 @@ public class Curso {
 	@NotEmpty(message="Debe ingresar Modalidad")
 	private String modalidad;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	//@NotNull(message="Debe seleccionar un docente")
+	@ManyToOne
 	@JoinColumn(name = "DOCENTE_ID")
-	@NotNull(message="Debe seleccionar un docente")
 	private Docente docente;
+	
+	
 	
 	@ManyToMany(mappedBy="cursos")
 	private List<Alumno> alumno;
@@ -117,21 +120,32 @@ public class Curso {
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
 	}
+	
+	
+	
+	
+		
+	
 	public Docente getDocente() {
 		return docente;
 	}
 	public void setDocente(Docente docente) {
 		this.docente = docente;
 	}
-	
-	
-	
+	public List<Alumno> getAlumno() {
+		return alumno;
+	}
+	public void setAlumno(List<Alumno> alumno) {
+		this.alumno = alumno;
+	}
 	public long getCurso_id() {
 		return curso_id;
 	}
 	public void setCurso_id(long curso_id) {
 		this.curso_id = curso_id;
 	}
+	
+	
 	
 	
 	public boolean isExisteCurso() {

@@ -23,7 +23,7 @@ import ar.edu.unju.fi.service.IDocenteService;
 public class DocenteController {
 	
 	@Autowired
-	@Qualifier("DocenteServiceImpLista")
+	@Qualifier("DocenteServiceImpSql")
 	private IDocenteService docenteService;
 	
 	//ListaDocente listaDocentes = new ListaDocente();
@@ -58,14 +58,14 @@ public class DocenteController {
 	@GetMapping("/mostrar")
 	public String getDocentesPage(Model model) {
 		//ListaDocente listaDocentes = new ListaDocente();
-		model.addAttribute("docente", docenteService.getListaDocente().getDocentes());
+		model.addAttribute("docente", docenteService.getListaDocente());
 		return "mostrar_docentes";
 	}
 	
 	@GetMapping("/lista")
 	public String getListaDocentesPage(Model model) {
 		//ListaDocente listaDocentes = new ListaDocente();
-		model.addAttribute("docente", docenteService.getListaDocente().getDocentes());
+		model.addAttribute("docente", docenteService.getListaDocente());
 		return "lista_docentes";
 	}
 	

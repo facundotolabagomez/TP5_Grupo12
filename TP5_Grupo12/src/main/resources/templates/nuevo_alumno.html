@@ -42,13 +42,25 @@
 							<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
 						</div>
 						<div class="mb-3">
-						<label for="cursoid" class=form-label>Curso</label>
-						<select th:field="*{curso.id}" class="form-control" id="cursoid">
-							<option th:each="curso: ${curso}" th:value="${curso.codigo}"
-								th:text="${curso.titulo}" />
-						</select> 
-						<div class="text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></div>
+							<label for="cursoId" class="form-label">Cursos</label>
+							<div>
+								<input class="checkb" type="checkbox" name="curso"
+									th:each="curso: ${curso}"
+									th:text="${curso.titulo}"
+									th:value="${curso.codigo}"/>
+								
+							</div>
+						
 						</div>
+						
+						<!-- <div class="mb-3">
+						<label for="cursoid" class=form-label>Curso</label>
+						<select th:field="*{cursos}" class="form-control" id="cursoid">
+							<option th:each="cursos: ${cursos}" th:value="${cursos.titulo}"
+								th:text="${cursos.titulo}" />
+						</select> 
+						<div class="text-danger" th:if="${#fields.hasErrors('cursos')}" th:errors="*{cursos}"></div>
+						</div> -->
 						
 						<button type="submit" class="btn btn-primary">Enviar</button>
 					</form>
